@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{keycloakBean.buscaUser}" />
+	</f:metadata>
+
+	<ul class="sidebar-menu">
+		<li class="header text-center" style="text-align: center">
+			<div class="pull-left image">
+				<p:graphicImage value="/template/eptcLogo4545.png"
+					class="img-thumbnail" />
+			</div> <br></br> Empresa Pública de <br></br> Transporte e Circulação
+		</li>
+
+		<li><p:link href="/index_sce.xhtml">
+				<i class="fa fa-home"></i>
+				<span>Inicio</span>
+			</p:link></li>
+		<li class="header" style="text-align: center">Menu do Sistema</li>
+
+		<!-- <li class="treeview">
+            <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span>Processo</span>
+                <span class="pull-right-container">
+                     <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+           <ul class="treeview-menu">
+                <li>
+                    <p:link href="/processo/create.xhtml" title="Adiciona Demanda" rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+                        <i class="fa fa-plus"></i>
+                        <span>Adicionar</span>
+                    </p:link>
+                </li>
+                
+                <li>
+                    <p:link href="/processo/search.xhtml" title="Consulta Demanda" rendered="#{keycloakBean.role != 'semRole'}">
+                        <i class="fa fa-search"></i>
+                        <span>Consultar</span>
+                    </p:link>
+                </li>
+                
+                <li class="treeview">
+	            <a href="#">
+	                <i class="fa fa-file"></i>
+	                <span>Parecer</span>
+	                <span class="pull-right-container">
+	                     <i class="fa fa-angle-left pull-right"></i>
+	                </span>
+	            </a>
+	            <ul class="treeview-menu">
+	                <li>
+	                    <p:link href="/parecer/create.xhtml" title="Adiciona Parecer" rendered="#{keycloakBean.role == 'admin'}">
+	                        <i class="fa fa-plus"></i>
+	                        <span>Adicionar</span>
+	                    </p:link>
+	                </li>
+	                
+	                <li>
+	                    <p:link href="/parecer/search.xhtml" title="Consulta Parecer" rendered="#{keycloakBean.role != 'semRole'}">
+	                        <i class="fa fa-search"></i>
+	                        <span>Consultar</span>
+	                    </p:link>
+	                </li>
+	            </ul>
+        	</li>
+                
+             </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-user-o"></i>
+                <span>Demanda</span>
+                <span class="pull-right-container">
+                     <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link href="/demanda/create.xhtml" title="Adiciona Demanda" rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+                        <i class="fa fa-plus"></i>
+                        <span>Adicionar</span>
+                    </p:link>
+                </li>
+                
+                <li>
+                    <p:link href="/demanda/search.xhtml" title="Consulta Demanda" rendered="#{keycloakBean.role != 'semRole'}">
+                        <i class="fa fa-search"></i>
+                        <span>Consultar</span>
+                    </p:link>
+                </li>
+                
+                <li>
+                    <p:link href="/demanda/prioritization.xhtml" title="Consulta Prioridades das Demandas" rendered="#{keycloakBean.role != 'semRole'}">
+                        <i class="fa fa-exclamation"></i>
+                        <span>Consulta Prioridades</span>
+                    </p:link>
+                </li>
+                
+                <li>
+                    <p:link href="/demanda/prioritizationPrazo.xhtml" title="Consulta Prioridades das Demandas">
+                        <i class="fa fa-exclamation"></i>
+                        <span>Priorização por Prazo</span>
+                    </p:link>
+                </li>
+         
+            
+           
+	      
+           </ul>
+        </li>
+        
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-user-o"></i>
+                <span>Projeto</span>
+                <span class="pull-right-container">
+                     <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link href="/projeto/create.xhtml" title="Adiciona Projeto" rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+                        <i class="fa fa-plus"></i>
+                        <span>Adicionar</span>
+                    </p:link>
+                </li>
+                
+                <li>
+                    <p:link href="/projeto/search.xhtml" title="Consulta Projeto" rendered="#{keycloakBean.role != 'semRole'}">
+                        <i class="fa fa-search"></i>
+                        <span>Consultar</span>
+                    </p:link>
+                </li>
+                
+                <li>
+                    <p:link href="/demanda/prioritization.xhtml" title="Consulta Prioridades das Demandas" rendered="#{keycloakBean.role != 'semRole'}">
+                        <i class="fa fa-exclamation"></i>
+                        <span>Consulta Prioridades</span>
+                    </p:link>
+                </li>
+                
+                <li>
+                    <p:link href="/demanda/prioritizationPrazo.xhtml" title="Consulta Prioridades das Demandas">
+                        <i class="fa fa-exclamation"></i>
+                        <span>Priorização por Prazo</span>
+                    </p:link>
+                </li>
+         
+            
+           
+	      
+           </ul>
+        </li>
+         -->
+		<li class="treeview"><a href="#"> <i class="fa fa-tasks"></i>
+				<span>Cadastros</span> <span class="pull-right-container"> <i
+					class="fa fa-angle-left pull-right"></i>
+			</span>
+		</a>
+
+			<ul class="treeview-menu">
+
+				<li class="treeview"><a href="#"> <i class="fa fa-circle-o"></i>
+						<span>Cadastros Auxiliares</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<!-- começo submenu cad auxiliares -->
+						<li class="treeview"><a href="#"> <i class="fa fa-tags"></i>
+								<span> Tipo de Equipamento</span> <span
+								class="pull-right-container"><i
+									class="fa fa-angle-left pull-right"></i> </span>
+						</a>
+							<ul class="treeview-menu">
+								<li><p:link
+										href="/cadastrosAuxiliares/tipoEquipamento/create.xhtml"
+										title="Adiciona Tipo Equipamento"
+										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+										<i class="fa fa-plus"></i>
+										<span>Adicionar</span>
+									</p:link></li>
+								<li><p:link
+										href="/cadastrosAuxiliares/tipoEquipamento/search.xhtml"
+										title="Consulta Tipo Equipamento"
+										rendered="#{keycloakBean.role != 'semRole'}">
+										<i class="fa fa-search"></i>
+										<span>Consultar</span>
+									</p:link></li>
+							</ul></li>
+						<!-- 						<li class="treeview"><a href="#"> <i class="fa fa-tags"></i> -->
+						<!-- 								<span> Tipo de Modelo</span><span class="pull-right-container"><i -->
+						<!-- 									class="fa fa-angle-left pull-right"></i> </span> -->
+						<!-- 						</a> -->
+						<!-- 							<ul class="treeview-menu"> -->
+						<!-- 								<li><p:link -->
+						<!-- 										href="/cadastrosAuxiliares/tipoModelo/create.xhtml" -->
+						<!-- 										title="Adiciona Tipo Modelo" -->
+						<!-- 										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+						<!-- 										<i class="fa fa-plus"></i> -->
+						<!-- 										<span>Adicionar</span> -->
+						<!-- 									</p:link></li> -->
+						<!-- 								<li><p:link -->
+						<!-- 										href="/cadastrosAuxiliares/tipoModelo/search.xhtml" -->
+						<!-- 										title="Consulta Tipo Modelo" -->
+						<!-- 										rendered="#{keycloakBean.role != 'semRole'}"> -->
+						<!-- 										<i class="fa fa-search"></i> -->
+						<!-- 										<span>Consultar</span> -->
+						<!-- 									</p:link></li> -->
+						<!-- 							</ul></li> -->
+
+						<!-- 						<li class="treeview"><a href="#"> <i class="fa fa-tags"></i> -->
+						<!-- 								<span> Equipamento Instalado</span> <span -->
+						<!-- 								class="pull-right-container"><i -->
+						<!-- 									class="fa fa-angle-left pull-right"></i> </span> -->
+						<!-- 						</a> -->
+						<!-- 							<ul class="treeview-menu"> -->
+						<!-- 								<li><p:link -->
+						<!-- 										href="/cadastrosAuxiliares/tipoEquipamentoInstalado/create.xhtml" -->
+						<!-- 										title="Adiciona Equipamento Instalação" -->
+						<!-- 										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+						<!-- 										<i class="fa fa-plus"></i> -->
+						<!-- 										<span>Adicionar</span> -->
+						<!-- 									</p:link></li> -->
+						<!-- 								<li><p:link -->
+						<!-- 										href="/cadastrosAuxiliares/tipoEquipamentoInstalado/search.xhtml" -->
+						<!-- 										title="Consulta Equipamento Instalação" -->
+						<!-- 										rendered="#{keycloakBean.role != 'semRole'}"> -->
+						<!-- 										<i class="fa fa-search"></i> -->
+						<!-- 										<span>Consultar</span> -->
+						<!-- 									</p:link></li> -->
+						<!-- 							</ul></li> -->
+
+						<li class="treeview"><a href="#"> <i class="fa fa-tags"></i>
+								<span> Status do Equipamento</span> <span
+								class="pull-right-container"><i
+									class="fa fa-angle-left pull-right"></i> </span>
+						</a>
+							<ul class="treeview-menu">
+								<li><p:link
+										href="/cadastrosAuxiliares/statusEquipamento/create.xhtml"
+										title="Adiciona Status Equipamento"
+										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+										<i class="fa fa-plus"></i>
+										<span>Adicionar</span>
+									</p:link></li>
+								<li><p:link
+										href="/cadastrosAuxiliares/statusEquipamento/search.xhtml"
+										title="Consulta Status Equipamento"
+										rendered="#{keycloakBean.role != 'semRole'}">
+										<i class="fa fa-search"></i>
+										<span>Consultar</span>
+									</p:link></li>
+							</ul></li>
+
+						<li class="treeview"><a href="#"> <i class="fa fa-tags"></i>
+								<span> Tipo de Processador</span> <span
+								class="pull-right-container"><i
+									class="fa fa-angle-left pull-right"></i> </span>
+						</a>
+							<ul class="treeview-menu">
+								<li><p:link
+										href="/cadastrosAuxiliares/tipoProcessador/create.xhtml"
+										title="Adiciona Tipo de Processador"
+										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+										<i class="fa fa-plus"></i>
+										<span>Adicionar</span>
+									</p:link></li>
+								<li><p:link
+										href="/cadastrosAuxiliares/tipoProcessador/search.xhtml"
+										title="Consulta Status Equipamento"
+										rendered="#{keycloakBean.role != 'semRole'}">
+										<i class="fa fa-search"></i>
+										<span>Consultar</span>
+									</p:link></li>
+							</ul></li>
+
+						<li class="treeview"><a href="#"> <i class="fa fa-tags"></i>
+								<span> Software Especifico</span> <span
+								class="pull-right-container"><i
+									class="fa fa-angle-left pull-right"></i> </span>
+						</a>
+							<ul class="treeview-menu">
+								<li><p:link
+										href="/cadastrosAuxiliares/softwareEspecifico/create.xhtml"
+										title="Adiciona Software Especifico"
+										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+										<i class="fa fa-plus"></i>
+										<span>Adicionar</span>
+									</p:link></li>
+								<li><p:link
+										href="/cadastrosAuxiliares/softwareEspecifico/search.xhtml"
+										title="Consulta Software Especifico"
+										rendered="#{keycloakBean.role != 'semRole'}">
+										<i class="fa fa-search"></i>
+										<span>Consultar</span>
+									</p:link></li>
+							</ul></li>
+
+						<li class="treeview"><a href="#"> <i class="fa fa-tags"></i>
+								<span> Sistema Operacional</span> <span
+								class="pull-right-container"><i
+									class="fa fa-angle-left pull-right"></i> </span>
+						</a>
+							<ul class="treeview-menu">
+								<li><p:link
+										href="/cadastrosAuxiliares/sistemaOperacional/create.xhtml"
+										title="Adiciona Sistema Operacional"
+										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+										<i class="fa fa-plus"></i>
+										<span>Adicionar</span>
+									</p:link></li>
+								<li><p:link
+										href="/cadastrosAuxiliares/sistemaOperacional/search.xhtml"
+										title="Consulta Sistema Operacional"
+										rendered="#{keycloakBean.role != 'semRole'}">
+										<i class="fa fa-search"></i>
+										<span>Consultar</span>
+									</p:link></li>
+							</ul></li>
+					</ul> <!-- termino do submenu cadastro equipamentos --></li>
+
+				<li class="treeview"><a href="#"> <i class="fa fa-circle-o"></i>
+						<span>Entrada de Equipamentos</span> <span
+						class="pull-right-container"> <i
+							class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+					<ul class="treeview-menu">
+						<!-- começo submenu cad equipamentos -->
+						<li class="treeview"><a href="#"> <i
+								class="fa fa-circle-o"></i> <span> Situação Equipamento</span> <span
+								class="pull-right-container"><i
+									class="fa fa-angle-left pull-right"></i> </span>
+						</a>
+							<ul class="treeview-menu">
+								<li><p:link
+										href="/cadastroEquipamentos/equipamentos/create.xhtml"
+										title="Cadastra Novo Equipamento"
+										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+										<i class="fa fa-plus"></i>
+										<span>Cadastra Novo</span>
+									</p:link></li>
+								<!-- 								<li><p:link -->
+								<!-- 										href="/cadastroEquipamentos/equipamentos/search.xhtml" -->
+								<!-- 										title="Entrada de Manutenção" -->
+								<!-- 										rendered="#{keycloakBean.role != 'semRole'}"> -->
+								<!-- 										<i class="fa fa-wrench"></i> -->
+								<!-- 										<span>Manutenção</span> -->
+								<!-- 									</p:link></li> -->
+							</ul>
+							<ul class="treeview-menu">
+								<li><p:link
+										href="/cadastroEquipamentos/equipamentos/search.xhtml"
+										title="Consulta Situação Equipamento"
+										rendered="#{keycloakBean.role != 'semRole'}">
+										<i class="fa fa-search"></i>
+										<span>Consultar Situação</span>
+									</p:link></li>
+							</ul></li>
+						<!-- 						<li class="treeview"><a href="#"> <i class="fa fa-cloud"></i> -->
+						<!-- 								<span> Software</span><span class="pull-right-container"><i -->
+						<!-- 									class="fa fa-angle-left pull-right"></i> </span> -->
+						<!-- 						</a> -->
+						<!-- 							<ul class="treeview-menu"> -->
+						<!-- 								<li><p:link -->
+						<!-- 										href="/cadastroEquipamentos/equipamentosSoftware/create.xhtml" -->
+						<!-- 										title="Adiciona Equipamento Software" -->
+						<!-- 										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+						<!-- 										<i class="fa fa-plus"></i> -->
+						<!-- 										<span>Adicionar</span> -->
+						<!-- 									</p:link></li> -->
+						<!-- 								<li><p:link -->
+						<!-- 										href="/cadastroEquipamentos/equipamentosSoftware/search.xhtml" -->
+						<!-- 										title="Consulta Equipamento Software" -->
+						<!-- 										rendered="#{keycloakBean.role != 'semRole'}"> -->
+						<!-- 										<i class="fa fa-search"></i> -->
+						<!-- 										<span>Consultar</span> -->
+						<!-- 									</p:link></li> -->
+						<!-- 							</ul></li> -->
+
+
+					</ul> <!-- termino do submenu status equipamentos --></li>
+				<!-- termino da entrada de equipamentos -->
+
+
+
+				<!-- 				<li class="treeview"><a href="#"> <i class="fa fa-circle-o"></i> -->
+				<!-- 						<span>Entrada de Manutenção</span> <span -->
+				<!-- 						class="pull-right-container"> <i -->
+				<!-- 							class="fa fa-angle-left pull-right"></i> -->
+				<!-- 					</span> -->
+				<!-- 				</a> -->
+				<!-- 					<ul class="treeview-menu"> -->
+				<!-- 						começo submenu cad equipamentos -->
+				<!-- 						<li class="treeview"><a href="#"> <i class="fa fa-cubes"></i> -->
+				<!-- 								<span>Entrada de Chamados </span> <span -->
+				<!-- 								class="pull-right-container"><i -->
+				<!-- 									class="fa fa-angle-left pull-right"></i> </span> -->
+				<!-- 						</a> -->
+				<!-- 							<ul class="treeview-menu"> -->
+				<!-- 								<li><p:link href="/sce/index.xhtml" -->
+				<!-- 										title="Chamados Procempa" -->
+				<!-- 										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 										<i class="fa fa-phone"></i> -->
+				<!-- 										<span>Chamados Procempa</span> -->
+				<!-- 									</p:link></li> -->
+				<!-- 																<li><p:link -->
+				<!-- 																		href="/cadastroEquipamentos/equipamentos/search.xhtml" -->
+				<!-- 																		title="Consulta Equipamento Hardware" -->
+				<!-- 																		rendered="#{keycloakBean.role != 'semRole'}"> -->
+				<!-- 																		<i class="fa fa-tag"></i> -->
+				<!-- 																		<span>Consultar</span> -->
+				<!-- 																	</p:link></li> -->
+				<!-- 							</ul></li> -->
+				<!-- 						<li class="treeview"><a href="#"> <i class="fa fa-cube"></i> -->
+				<!-- 								<span> Processo de Saida</span><span -->
+				<!-- 								class="pull-right-container"><i -->
+				<!-- 									class="fa fa-angle-left pull-right"></i> </span> -->
+				<!-- 						</a> -->
+				<!-- 							<ul class="treeview-menu"> -->
+				<!-- 																<li><p:link -->
+				<!-- 																		href="/cadastroEquipamentos/equipamentosSoftware/create.xhtml" -->
+				<!-- 																		title="Adiciona Equipamento Software" -->
+				<!-- 																		rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																		<i class="fa fa-plus"></i> -->
+				<!-- 																		<span>Adicionar</span> -->
+				<!-- 																	</p:link></li> -->
+				<!-- 																<li><p:link -->
+				<!-- 																		href="/cadastroEquipamentos/equipamentosSoftware/search.xhtml" -->
+				<!-- 																		title="Consulta Equipamento Software" -->
+				<!-- 																		rendered="#{keycloakBean.role != 'semRole'}"> -->
+				<!-- 																		<i class="fa fa-search"></i> -->
+				<!-- 																		<span>Consultar</span> -->
+				<!-- 																	</p:link></li> -->
+				<!-- 							</ul></li> -->
+				<!-- 					</ul> termino do submenu entrada de equipamentos</li> -->
+
+
+
+
+				<!-- 												<li class="treeview"><a href="#"> <i class="fa fa-circle-o"></i> -->
+				<!-- 														<span>Classificação Atividade</span> <span -->
+				<!-- 														class="pull-right-container"> <i -->
+				<!-- 															class="fa fa-angle-left pull-right"></i> -->
+				<!-- 													</span> -->
+				<!-- 												</a> -->
+				<!-- 													<ul class="treeview-menu"> -->
+				<!-- 														<li><p:link href="/classificacaoAtividade/create.xhtml" -->
+				<!-- 																title="Adiciona Classificação" -->
+				<!-- 																rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																<i class="fa fa-plus"></i> -->
+				<!-- 																<span>Adicionar</span> -->
+				<!-- 															</p:link></li> -->
+				<!-- 														<li><p:link href="/classificacaoAtividade/search.xhtml" -->
+				<!-- 																title="Consulta Classificação" -->
+				<!-- 																rendered="#{keycloakBean.role != 'semRole'}"> -->
+				<!-- 																<i class="fa fa-search"></i> -->
+				<!-- 																<span>Consultar</span> -->
+				<!-- 															</p:link></li> -->
+				<!-- 													</ul></li> -->
+
+				<!-- 																<li class="treeview"><a href="#"> <i -->
+				<!-- 																		class="fa fa-briefcase"></i> <span>Coletes</span> <span -->
+				<!-- 																		class="pull-right-container"> <i -->
+				<!-- 																			class="fa fa-angle-left pull-right"></i> -->
+				<!-- 																	</span> -->
+				<!-- 																</a> -->
+				<!-- 																	<ul class="treeview-menu"> -->
+				<!-- 																		<li><p:link href="/colete/create.xhtml" -->
+				<!-- 																				title="Adiciona Colete" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-plus"></i> -->
+				<!-- 																				<span>Adicionar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																		<li><p:link href="/colete/search.xhtml" -->
+				<!-- 																				title="Consulta Colete" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-search"></i> -->
+				<!-- 																				<span>Consultar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																	</ul></li> -->
+
+				<!-- 																<li class="treeview"><a href="#"> <i class="fa fa-truck"></i> -->
+				<!-- 																		<span>CRD</span> <span class="pull-right-container"> <i -->
+				<!-- 																			class="fa fa-angle-left pull-right"></i> -->
+				<!-- 																	</span> -->
+				<!-- 																</a> -->
+				<!-- 																	<ul class="treeview-menu"> -->
+				<!-- 																		<li><p:link href="/crd/create.xhtml" title="Adiciona CRD" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-plus"></i> -->
+				<!-- 																				<span>Adicionar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																		<li><p:link href="/crd/search.xhtml" title="Consulta CRD" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-search"></i> -->
+				<!-- 																				<span>Consultar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																	</ul></li> -->
+
+				<!-- 																<li class="treeview"><a href="#"> <i class="fa fa-file"></i> -->
+				<!-- 																		<span>Logradouro</span> <span class="pull-right-container"> -->
+				<!-- 																			<i class="fa fa-angle-left pull-right"></i> -->
+				<!-- 																	</span> -->
+				<!-- 																</a> -->
+				<!-- 																	<ul class="treeview-menu"> -->
+				<!-- 																		<li><p:link href="/logradouro/create.xhtml" -->
+				<!-- 																				title="Adiciona Logradouro" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-plus"></i> -->
+				<!-- 																				<span>Adicionar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																		<li><p:link href="/logradouro/search.xhtml" -->
+				<!-- 																				title="Consulta Logradouro" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-search"></i> -->
+				<!-- 																				<span>Consultar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																	</ul></li> -->
+
+				<!-- 																<li class="treeview"><a href="#"> <i -->
+				<!-- 																		class="fa fa-line-chart"></i> <span>Origem Atividade</span> <span -->
+				<!-- 																		class="pull-right-container"> <i -->
+				<!-- 																			class="fa fa-angle-left pull-right"></i> -->
+				<!-- 																	</span> -->
+				<!-- 																</a> -->
+				<!-- 																	<ul class="treeview-menu"> -->
+				<!-- 																		<li><p:link href="/origemAtividade/create.xhtml" -->
+				<!-- 																				title="Adiciona Origem da Atividade" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-plus"></i> -->
+				<!-- 																				<span>Adicionar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																		<li><p:link href="/v/search.xhtml" -->
+				<!-- 																				title="Consulta Origem da Atividade" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-search"></i> -->
+				<!-- 																				<span>Consultar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																	</ul></li> -->
+
+				<!-- 																				<li class="treeview"><a href="#"> <i -->
+				<!-- 																						class="fa fa-briefcase"></i> <span>Rádio</span> <span -->
+				<!-- 																						class="pull-right-container"> <i -->
+				<!-- 																							class="fa fa-angle-left pull-right"></i> -->
+				<!-- 																					</span> -->
+				<!-- 																				</a> -->
+				<!-- 																					<ul class="treeview-menu"> -->
+				<!-- 																						<li><p:link href="/radio/create.xhtml" title="Adiciona Rádio" -->
+				<!-- 																								rendered="#{keycloakBean.role == 'admin'}"> -->
+				<!-- 																								<i class="fa fa-plus"></i> -->
+				<!-- 																								<span>Adicionar</span> -->
+				<!-- 																							</p:link></li> -->
+				<!-- 																						<li><p:link href="/radio/search.xhtml" title="Consulta Rádio" -->
+				<!-- 																								rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																								<i class="fa fa-search"></i> -->
+				<!-- 																								<span>Consultar</span> -->
+				<!-- 																							</p:link></li> -->
+				<!-- 																					</ul></li> -->
+
+				<!-- 																				<li class="treeview"><a href="#"> <i -->
+				<!-- 																						class="fa fa-line-chart"></i> <span>Situação Atividade</span> <span -->
+				<!-- 																						class="pull-right-container"> <i -->
+				<!-- 																							class="fa fa-angle-left pull-right"></i> -->
+				<!-- 																					</span> -->
+				<!-- 																				</a> -->
+				<!-- 																					<ul class="treeview-menu"> -->
+				<!-- 																						<li><p:link href="/situacaoAtividade/create.xhtml" -->
+				<!-- 																								title="Adiciona Situação Atividade" -->
+				<!-- 																								rendered="#{keycloakBean.role == 'admin'}"> -->
+				<!-- 																								<i class="fa fa-plus"></i> -->
+				<!-- 																								<span>Adicionar</span> -->
+				<!-- 																							</p:link></li> -->
+				<!-- 																						<li><p:link href="/situacaoAtividade/search.xhtml" -->
+				<!-- 																								title="Consulta Situação Atividade" -->
+				<!-- 																								rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																								<i class="fa fa-search"></i> -->
+				<!-- 																								<span>Consultar</span> -->
+				<!-- 																							</p:link></li> -->
+				<!-- 																					</ul></li> -->
+
+				<!-- 																				<li class="treeview"><a href="#"> <i -->
+				<!-- 																						class="fa fa-user-circle"></i> <span>Situação da Escala</span> <span -->
+				<!-- 																						class="pull-right-container"> <i -->
+				<!-- 																							class="fa fa-angle-left pull-right"></i> -->
+				<!-- 																					</span> -->
+				<!-- 																				</a> -->
+				<!-- 																					<ul class="treeview-menu"> -->
+				<!-- 																						<li><p:link href="/situacaoEscala/create.xhtml" -->
+				<!-- 																								title="Adiciona Situação Escala" -->
+				<!-- 																								rendered="#{keycloakBean.role == 'admin'}"> -->
+				<!-- 																								<i class="fa fa-plus"></i> -->
+				<!-- 																								<span>Adicionar</span> -->
+				<!-- 																							</p:link></li> -->
+				<!-- 																						<li><p:link href="/situacaoEscala/search.xhtml" -->
+				<!-- 																								title="Consulta Situação Escala" -->
+				<!-- 																								rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																								<i class="fa fa-search"></i> -->
+				<!-- 																								<span>Consultar</span> -->
+				<!-- 																							</p:link></li> -->
+				<!-- 																					</ul></li> -->
+
+				<!-- 																				<li class="treeview"><a href="#"> <i class="fa fa-file"></i> -->
+				<!-- 																						<span>Status</span> <span class="pull-right-container"> <i -->
+				<!-- 																							class="fa fa-angle-left pull-right"></i> -->
+				<!-- 																					</span> -->
+				<!-- 																				</a> -->
+				<!-- 																					<ul class="treeview-menu"> -->
+				<!-- 																						<li><p:link href="/status/create.xhtml" -->
+				<!-- 																								title="Adiciona Status" -->
+				<!-- 																								rendered="#{keycloakBean.role == 'admin'}"> -->
+				<!-- 																								<i class="fa fa-plus"></i> -->
+				<!-- 																								<span>Adicionar</span> -->
+				<!-- 																							</p:link></li> -->
+				<!-- 																						<li><p:link href="/status/search.xhtml" -->
+				<!-- 																								title="Consulta Status" -->
+				<!-- 																								rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																								<i class="fa fa-search"></i> -->
+				<!-- 																								<span>Consultar</span> -->
+				<!-- 																							</p:link></li> -->
+				<!-- 																					</ul></li> -->
+
+				<!-- 																<li class="treeview"><a href="#"> <i -->
+				<!-- 																		class="fa fa-briefcase"></i> <span>TEM</span> <span -->
+				<!-- 																		class="pull-right-container"> <i -->
+				<!-- 																			class="fa fa-angle-left pull-right"></i> -->
+				<!-- 																	</span> -->
+				<!-- 																</a> -->
+				<!-- 																	<ul class="treeview-menu"> -->
+				<!-- 																		<li><p:link href="/tem/create.xhtml" title="Adiciona TEM" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-plus"></i> -->
+				<!-- 																				<span>Adicionar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																		<li><p:link href="/tem/search.xhtml" title="Consulta TEM" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-search"></i> -->
+				<!-- 																				<span>Consultar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																	</ul></li> -->
+
+				<!-- 																<li class="treeview"><a href="#"> <i class="fa fa-users"></i> -->
+				<!-- 																		<span>Tipo Atividade</span> <span class="pull-right-container"> -->
+				<!-- 																			<i class="fa fa-angle-left pull-right"></i> -->
+				<!-- 																	</span> -->
+				<!-- 																</a> -->
+				<!-- 																	<ul class="treeview-menu"> -->
+				<!-- 																		<li><p:link href="/tem/create.xhtml" title="Adiciona TEM" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-plus"></i> -->
+				<!-- 																				<span>Adicionar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																		<li><p:link href="/tem/search.xhtml" title="Consulta TEM" -->
+				<!-- 																				rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}"> -->
+				<!-- 																				<i class="fa fa-search"></i> -->
+				<!-- 																				<span>Consultar</span> -->
+				<!-- 																			</p:link></li> -->
+				<!-- 																	</ul></li> -->
+
+			</ul></li>
+	</ul>
+
+	<!--   <li class="header">
+            Layout
+        </li>
+        <li>
+            <p:link href="/pages/layout/breadcrumb.xhtml">
+                <i class="fa  fa-ellipsis-h"></i>
+                <span>Breadcrumbs</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link href="/pages/layout/menu.xhtml">
+                <i class="fa fa-outdent"></i>
+                <span>Menu</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link href="/pages/layout/skin.xhtml">
+                <i class="fa fa-gears"></i>
+                <span>Skins</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link href="/pages/layout/sidebar.xhtml">
+                <i class="fa fa-outdent"></i>
+                <span>Sidebar</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link href="/horizontal-layout" onclick="$('#link-horizontal-layout').click();return false">
+                <i class="fa fa-credit-card"></i>
+                <span><b>Horizontal</b> layout</span>
+            </p:link>
+            <h:form prependId="false">
+                <p:commandLink id="link-horizontal-layout" action="#{layoutMB.setHorizontalLayout}" ajax="false"/>
+            </h:form>
+        </li>-->
+
+
+
+	<script type="text/javascript">
+        if (isMobile()) {
+            $('ul.sidebar-menu a.ui-link').click(function () {
+                $(this).prop('disabled', true);
+                showBar();
+            })
+        }
+
+		var 
+        
+    </script>
+
+</ui:composition>

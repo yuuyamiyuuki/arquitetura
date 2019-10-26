@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet name="bootstrap.css" />
+		
+</h:head> 
+<h:body style="background-color:#ECF0F5;"> 
+
+
+
+<b:navBar position="inline" brand="SPD" brandHref="" style="background-color:#3c8dbc; margin: 0 auto; border-radius: 0px; font-size:17px;">
+    <b:navbarLinks pull="right">
+        <b:navLink value="Login1" href="#"></b:navLink>
+        
+    </b:navbarLinks>
+</b:navBar>
+
+<b:navBar  brand="SPD" brandHref="" >
+    <b:navbarLinks pull="right">
+        <b:navLink value="Login1" href="#"></b:navLink>
+        
+    </b:navbarLinks>
+</b:navBar>
+
+
+<!-- <b:column span="2"  style="padding: 0px; background-color:#222D32; height: 1000px;">
+
+
+
+	<b:image title="eptc" name="test" value="/template/eptcLogo.png"  tooltip="EPTC" tooltipPosition="left" style="border-radius: 30px; display: block;
+    margin: auto; width: 50%; padding: 10%;" />
+		
+	<h:outputText value="Empresa Pública de"  style="font-size: 13px;padding: 60px; text-align: center;" escape="false" /><br></br>
+	<h:outputText value="Transporte e Circulação"  style="font-size: 13px; padding: 48px; text-align: center;" escape="false" />
+	<br></br>
+	<br></br>
+	
+ 	<ul>
+		<li>
+			<h:link outcome="/index" value="Inicio" style=" color: #ffffff; font-size: 15px;"/>
+		</li>
+	</ul>
+		 -->
+<b:column  col-xs="3" col-sm="3" col-md="2" col-lg="2" style="padding: 0px; background-color:#222D32; height: 930px;">
+<!-- <b:panel  look="" style="background-color:#222D32; height: 1170px; margin: 0px 0px 0px -15px;border: none;" small-screen="one-fourth" large-screen="one-fourth" medium-screen="one-fourth"
+visible="lg, md, sm" col-lg="2" col-md="2" col-sm="2">-->
+
+	<b:image title="eptc" name="test" value="/template/eptcLogo.png"  tooltip="EPTC" tooltipPosition="left" style="border-radius: 30px; display: block;
+    margin: auto; width: 50%; padding: 10%;" />
+		
+	<p:outputLabel value="Empresa Pública de"  style="font-size: 11px; text-align: center; margin: 0px 0px 0px 60px;" escape="false" /><br></br>
+	<p:outputLabel  value="Transporte e Circulação"  style="font-size: 11px; text-align: center;margin: 0px 0px 0px 45px;" escape="false" />
+	<br></br>
+	<br></br>
+	
+ 	<ul>
+		<li>
+			<h:link outcome="/index" value="Inicio" style=" color: #ffffff; font-size: 15px;"/>
+		</li>
+	</ul>
+	<b:accordion>
+	
+	<b:panel  look="" title="Processo" style="background-color:#222D32; color: #ffffff;" styleClass ="menuTemplate" small-screen="one-fourth">
+       <b:listLinks style="background-color:#222D32;">
+             
+             <b:navLink outcome="/processo_1/search" value="Consultar" style="color:white; font-size:15px;" />
+             <b:navLink></b:navLink>
+             <b:navLink outcome="/processo_1/create" value="Adicionar" style="color:white; font-size:15px" />
+             <b:navLink></b:navLink>
+			 <b:messages />	
+		</b:listLinks>
+    
+     </b:panel>
+     
+        
+     <b:panel look="" title="Demanda" style="background-color:#222D32; color: #ffffff" col-xs="2" small-screen="one-fourth">
+     	<b:listLinks style="background-color:#222D32;">
+              
+             <b:navLink outcome="/demanda_1/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <b:navLink outcome="/demanda_1/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+			 <b:messages />
+        </b:listLinks>
+      </b:panel>
+      
+      
+           <b:panel look="" title="Projeto" style="background-color:#222D32; color: #ffffff" col-xs="2" small-screen="one-fourth" >
+     	<b:listLinks style="background-color:#222D32;">
+              
+             <!-- <b:navLink outcome="/demanda_1/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <b:navLink outcome="/demanda_1/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink> -->
+			 <b:messages />
+        </b:listLinks>
+      </b:panel>
+      
+       <b:panel look="" title="Orçamento" style="background-color:#222D32; color: #ffffff" col-xs="2" small-screen="one-fourth">
+     	<b:listLinks style="background-color:#222D32;">
+            <!--   
+             <b:navLink outcome="/demanda_1/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <b:navLink outcome="/demanda_1/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink> -->
+			 <b:messages />
+        </b:listLinks>
+      </b:panel>
+      
+      <b:panel look="" title="Cadastros" style="background-color:#222D32; color: #ffffff" col-xs="2" small-screen="one-fourth" >
+         
+         <b:listLinks style="background-color:#222D32; ">
+             
+             <b:panel look="" title="Equipe" style="background-color:#222D32; color: #ffffff" collapsed="true">
+             <b:navLink outcome="/equipe/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/equipe/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+             </b:panel>
+             
+             <b:panel look="" title="Logradouro" style="background-color:#222D32; color: #ffffff" collapsed="true">
+             <b:navLink outcome="/logradouro/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/logradouro/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+             </b:panel>
+			 
+			 <b:panel look="white" title="Motivo Demanda" style="background-color:#222D32; color: #ffffff" collapsed="true">
+			 <b:navLink outcome="/motivoDemanda/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/motivoDemanda/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+             </b:panel>
+			 
+			 <b:panel look="white" title="Natureza Demanda" style="background-color:#222D32; color: #ffffff" collapsed="true">
+			 <b:navLink outcome="/naturezaDemanda/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/naturezaDemanda/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+             </b:panel>
+             
+			 <b:panel look="white" title="Parecer" style="background-color:#222D32; color: #ffffff" collapsed="true">
+			 <b:navLink outcome="/parecer/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/parecer/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+             </b:panel>
+			 
+			 <b:panel look="white" title="Situação" style="background-color:#222D32; color: #ffffff" collapsed="true">
+			 <b:navLink outcome="/situacao/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/situacao/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+             </b:panel>
+			 
+			 <b:panel look="white" title="Status" style="background-color:#222D32; color: #ffffff" collapsed="true">
+			 <b:navLink outcome="/status/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/status/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+             </b:panel>
+             
+             <b:panel look="white" title="Tipo Entrada" style="background-color:#222D32; color: #ffffff" collapsed="true">
+             <b:navLink outcome="/tipoEntrada/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/tipoEntrada/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+             </b:panel>
+			 
+			 <b:panel look="white" title="Tipo Processo" style="background-color:#222D32; color: #ffffff" collapsed="true">
+			 <b:navLink outcome="/tipoProcesso/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/tipoProcesso/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+             </b:panel>
+			 
+			 <b:panel look="white" title="Tipo Requerente" style="background-color:#222D32; color: #ffffff" collapsed="true">
+			 <b:navLink outcome="/tipoRequerente/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/tipoRequerente/create" value="Adicionar" style="color:white;" />
+             </b:panel>
+            
+             <b:panel look="white" title="Urgencia" style="background-color:#222D32; color: #ffffff" collapsed="true">	 
+			 <b:navLink outcome="/urgencia/search" value="Consultar" style="color:white;" />
+             <b:navLink></b:navLink>
+             <br></br>
+             <b:navLink outcome="/urgencia/create" value="Adicionar" style="color:white;" />
+             <b:navLink></b:navLink>
+             </b:panel>
+             	
+         </b:listLinks>
+         
+      </b:panel>
+      
+      </b:accordion>
+    <!-- </b:panel> -->
+</b:column>
+ 
+ 		<div id="content">
+ 		
+			<h1>
+				<ui:insert name="header"/>
+			</h1>
+			<h2>
+				<ui:insert name="subheader" />
+			</h2>
+
+			<ui:insert name="main" />
+		</div>
+
+
+</h:body> 
+	
+</html>

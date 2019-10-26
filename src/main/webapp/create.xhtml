@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"
+	template="/admin.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{situacaoBean.id}'/>
+		<f:event type="preRenderView" listener='#{situacaoBean.retrieve}'/>
+		<f:event type="preRenderView" listener="#{keycloakBean.buscaUser}"/>
+	</f:metadata>
+
+	<ui:define name="title">
+		<c:choose>
+			<c:when test='#{!empty situacaoBean.id}'>
+				<h1 style="font-size:24px; color: #444"><b>Editar Situacao</b></h1>
+			</c:when>
+			<c:otherwise>
+				<h1 style="font-size:24px; color: #444"><b>Adicionar Situacao</b></h1>
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="create">
+		
+			<p:panel header="Dados da Situacao" styleClass="box-primary" rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+			<p:messages globalOnly="true" styleClass="error"/>
+
+			<p:panelGrid columns="3" columnClasses="botaoGrid ui-grid-col-2,botaoGrid ui-grid-col-6, botaoGrid ui-grid-col-4" layout="grid" >
+				<p:outputLabel for="situacaoBeanSituacaoDescricao" value="Descricao:"/>
+				<h:panelGroup>
+					<p:inputText id="situacaoBeanSituacaoDescricao" required="true" value="#{situacaoBean.situacao.descricao}" styleClass="inputBig"/>
+					<p:message for="situacaoBeanSituacaoDescricao" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*" styleClass="required"/>
+				<p:outputLabel for="situacaoBeanSituacaoObservacao" value="Observacao:"/>
+				<h:panelGroup>
+					<p:inputTextarea id="situacaoBeanSituacaoObservacao" rows="2" cols="55" value="#{situacaoBean.situacao.observacao}" styleClass="inputBig"/>
+					<p:message for="situacaoBeanSituacaoObservacao" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+			</p:panelGrid>
+
+			<p:panelGrid columns="1" styleClass="botaoGrid" >
+					<h:panelGroup styleClass="buttons">
+						
+						<b:commandButton value="Salvar" action='#{situacaoBean.update}' styleClass="btn btn-primary" style="font-size:13px;" iconAwesome="fa-floppy-o"/>
+												
+						<c:choose>
+							<c:when test='#{!empty situacaoBean.id}'>
+							<b:button value="Cancelar" outcome="view" styleClass="btn btn-primary" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-times">
+								<f:param name="id" value='#{situacaoBean.id}'/>
+							</b:button>
+							<!-- <b:commandButton value="Excluir" action='#{situacaoBean.delete}' styleClass="btn btn-primary" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-file-o"/> -->
+						</c:when>
+						<c:otherwise>
+							<b:button value="Cancelar" outcome="search" styleClass="btn btn-primary"  style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-times"/>
+						</c:otherwise>
+					</c:choose>
+						</h:panelGroup>
+			</p:panelGrid>
+			</p:panel>
+			
+		</h:form>
+	</ui:define>
+
+</ui:composition>

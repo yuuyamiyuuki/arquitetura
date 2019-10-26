@@ -1,0 +1,86 @@
+/* checkbox */
+
+.ui-state-highlight .ui-chkbox-box .ui-icon {
+  background-image: none
+}
+
+div.ui-chkbox-box {
+  &.ui-state-hover, &.ui-state-focus {
+    background: transparent;
+  }
+
+}
+
+div.ui-chkbox-box.ui-state-active,
+div.ui-chkbox-box.ui-state-focus.ui-state-active {
+  border: 1px solid @light-blue;
+  background: @light-blue;
+  color: #FFFFFF;
+}
+
+.ui-chkbox-box.ui-state-active .ui-icon {
+  background-image: none;
+
+}
+
+div.ui-chkbox {
+
+  label {
+    font-weight: 500;
+  }
+  .ui-chkbox-box {
+    width: 18px;
+    height: 18px;
+    overflow: hidden;
+  }
+  .ui-chkbox-label {
+    margin-top: -1px;
+  }
+
+  span.ui-icon-check {
+    position: relative;
+    right: 3px;
+    bottom: 2px;
+  }
+
+  span.ui-chkbox-icon:hover {
+    opacity: 1;
+  }
+}
+
+
+body .ui-selectmanycheckbox.ui-grid-responsive .ui-grid-row > div {
+  padding: .2em;
+  background-color:#ECF0F5; 
+
+}
+
+div.ui-chkbox span.ui-chkbox-icon.ui-icon-blank:before {
+  color: transparent;
+}
+
+div.ui-chkbox span.ui-chkbox-icon {
+  background-image: none !important;
+  display: inline;
+  &:before {
+    font-family: FontAwesome;
+    color: #fff;
+    display: inline !important;
+    position: relative;
+    font-size: @font-awesome-icon-size;
+    margin-left: 4px;
+    overflow: hidden;
+    content: "\f00c" !important;
+  }
+  &:hover:before {
+    color: #fff;
+  }
+}
+
+@media (max-width: @screen-xs) {
+  div.ui-chkbox span.ui-chkbox-icon {
+    &:before {
+      font-size: @font-awesome-icon-size + 1;
+    }
+  }
+}

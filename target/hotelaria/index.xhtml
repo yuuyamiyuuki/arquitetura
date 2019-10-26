@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="admin.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:define name="title">
+		<h1 style="color: #444">
+			<small> Bem Vindo, #{keycloakBean.nomeLogado}</small>
+		</h1>
+		<h:outputLabel />
+		<h1 style="font-size: 20px; color: #444">Escolha uma opção:</h1>
+		<h:outputLabel />
+	</ui:define>
+	<ui:define name="body">
+		<h2 class="success"></h2>
+		<!-- <p:commandButton value="Pesquisar" action='#{keycloakBean.buscaUser}' styleClass="btn btn-primary" style="font-size:13px;" iconAwesome="fa-search"/> -->
+		<ui:include src="pages/dashboard/dashboard_sce.xhtml" />
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>#{empty pageTitle ? 'Page Title' : pageTitle}</title>
+	<link rel="icon" href='#{resource["favicon.ico"]}' />
+	<h:outputStylesheet name="bootstrap.css" />
+	<h:outputStylesheet name="forge-style.css" />
+</h:head>
+
+<h:body>
+	<ui:debug rendered="#{facesContext.application.projectStage == 'Development'}" />
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<h:link id="brandLink" outcome="/index.xhtml" styleClass="brand">
+					<h:outputText value="Welcome to " rendered=" #{request.userPrincipal !=null} "/>
+                    Sce
+                    <h:outputText value=",  #{request.userPrincipal.name}" rendered="#{request.userPrincipal !=null} "/>
+				</h:link>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li><a href="http://forge.jboss.org/document/hands-on-lab">How to Customize</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container forgecontainer">
+		<div id="navigation">
+			<h:link id="homeLink" outcome="/index.xhtml">
+				<h:graphicImage value='#{resource["forge-logo.png"]}' alt="Forge... get hammered" border="0" />	
+			</h:link>
+			<ul>
+				<li>
+					<h:link outcome="/demanda/search" value="Atividade"/>
+				</li>
+				<li>
+					<h:link outcome="/atividadeEscala/search" value="Atividade Escala"/>
+				</li>
+				<li>
+					<h:link outcome="/cadastroEquipamentos/search" value="Cadastro Equipamentos"/>
+				</li>
+				<li>
+					<h:link outcome="/cadastrosAuxiliares/search" value="Cadastros Auxiliares"/>
+				</li>
+				<li>
+					<h:link outcome="/categoria/search" value="Categoria"/>
+				</li>
+				<li>
+					<h:link outcome="/classificacaoAtividade/search" value="Classificacao Atividade"/>
+				</li>
+				<li>
+					<h:link outcome="/colete/search" value="Colete"/>
+				</li>
+				<li>
+					<h:link outcome="/crd/search" value="Crd"/>
+				</li>
+				<li>
+					<h:link outcome="/entradaEquipamentos/search" value="Entrada Equipamentos"/>
+				</li>
+				<li>
+					<h:link outcome="/equipamento/search" value="Equipamento"/>
+				</li>
+				<li>
+					<h:link outcome="/equipamentoSoftware/search" value="Equipamento Software"/>
+				</li>
+				<li>
+					<h:link outcome="/logradouro/search" value="Logradouro"/>
+				</li>
+				<li>
+					<h:link outcome="/origemAtividade/search" value="Origem Atividade"/>
+				</li>
+				<li>
+					<h:link outcome="/pages/search" value="Pages"/>
+				</li>
+				<li>
+					<h:link outcome="/radio/search" value="Radio"/>
+				</li>
+				<li>
+					<h:link outcome="/situacaoAtividade/search" value="Situacao Atividade"/>
+				</li>
+				<li>
+					<h:link outcome="/situacaoEscala/search" value="Situacao Escala"/>
+				</li>
+				<li>
+					<h:link outcome="/status/search" value="Status"/>
+				</li>
+				<li>
+					<h:link outcome="/tem/search" value="Tem"/>
+				</li>
+				<li>
+					<h:link outcome="/template/search" value="Template"/>
+				</li>
+				<li>
+					<h:link outcome="/tipoAtividade/search" value="Tipo Atividade"/>
+				</li>
+				<li>
+					<h:link outcome="/tipoEquipamentoInstalado/search" value="Tipo Equipamento Instalado"/>
+				</li>
+			</ul>
+		</div>
+
+		<div id="content">
+			<h1>
+				<ui:insert name="header" />
+			</h1>
+			<h2>
+				<ui:insert name="subheader" />
+			</h2>
+
+			<ui:insert name="main" />
+		</div>
+	</div>
+
+	<footer>
+		<div id="footer-wrapper">
+	    	<p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
+	    </div>
+	</footer>
+
+</h:body>
+</html>

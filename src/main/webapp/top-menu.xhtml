@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<style type="text/css">
+div.ui-menu.ui-menu-dynamic {
+	z-index: 9999 !important;
+}
+
+div.btn-download.ui-splitbutton.ui-buttonset {
+	margin: 10px;
+}
+</style>
+
+	<h:form prependId="false" style="display: inline;">
+
+	</h:form>
+	<script type="text/javascript">
+
+        function start() {
+            PF('statusDialog').show();
+        }
+
+        function stop() {
+            PF('statusDialog').hide();
+        }
+    </script>
+
+	<ul class="nav navbar-nav">
+		<li class="dropdown user user-menu"><a href="#"
+			class="dropdown-toggle" data-toggle="dropdown"><i
+				class="glyphicon glyphicon-user" /><span class="hidden-xs">
+					#{keycloakBean.nomeLogado}</span></a>
+			<ul class="dropdown-menu">
+				<li class="user-header">
+					<div class="hidden-xs">
+						<br></br>
+						<h:graphicImage
+							style="border-radius:10%; allign:center; width:30%; heigth: auto;"
+							value="/template/eptcLogo.png" class="img-thumbnail" />
+						<!-- 							<p:graphicImage class="img-thumbnail" value="#{template[eptcLogo.png]}" /> -->
+						<br></br> <br></br> <span style="color: #f4f4f4;"
+							class="hidden-xs"><p:outputLabel
+								value="#{keycloakBean.nomeLogado}" /></span>
+					</div>
+
+				</li>
+				<li class="user-footer"><h:form prependId="false">
+						<!--   <div class="pull-left">
+                            <p:commandLink  styleClass="btn btn-danger"  value="Change password"/>
+                        </div> -->
+						<div class="pull-right">
+							<!-- <p:commandLink id="logout" action="#{request.logout()}"  title="Logoff">
+                                <i class="fa fa-sign-out fa-2x"></i>
+                            </p:commandLink> -->
+							<b:commandButton id="logout" styleClass="btn-primary"
+								action="/index.xhmtl?faces-redirect=true"
+								actionListener="#{request.logout()}" value="Sair" />
+
+						</div>
+					</h:form></li>
+			</ul> <!-- <p:commandLink id="logout" action="#{request.logout()}"  title="Logoff">
+                                <i class="fa fa-sign-out fa-2x"></i>
+                            </p:commandLink> --></li>
+
+	</ul>
+
+
+</ui:composition>

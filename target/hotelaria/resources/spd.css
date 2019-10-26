@@ -1,0 +1,78 @@
+.botaoGrid,
+.botaoGrid.ui-panelgrid>*>tr,
+.botaoGrid.ui-panelgrid>*>tr>td {
+ border: none;
+ background-color:#ffffff; 
+  
+}
+
+.outputLabel.ui-outputlabel {
+	background-color:#ECF0F5; 
+	
+}
+
+.inputLabel.ui-inputfield {
+	background-color:#ECF0F5; 
+	
+}
+
+#content .add-button {
+	display: block;
+	width: 22px;
+	height: 22px;
+	background-image: url(#{request.contextPath}/resources/add.png);
+	
+	
+}
+
+#content .data-table .remove-button {
+	display: block;
+	width: 22px;
+	height: 22px;
+	background-image: url(#{request.contextPath}/resources/remove.png);
+	float: right;
+	
+	
+}
+
+.buscaGrid,
+.buscaGrid.ui-panelgrid>*>tr,
+.buscaGrid.ui-panelgrid>*>tr>td
+{
+	
+  	width: 100%;
+}
+
+.ui-autocomplete{
+width: 92% !important;}
+.ui-autocomplete-input{
+width: 108% !important;}
+
+
+.cssColumn1 {
+	width: 100%;
+	 
+}
+
+.cssColumn2 {
+	width: 400%;
+}
+
+.inputBig.ui-inputtext{
+	width: 100%;
+}
+
+.inputSmall.ui-inputtext{
+	width: 60%;
+}
+
+#content .required {
+	width: 1%;
+	color: red;	
+	padding-top: 7pt;
+	padding-left: 4pt;
+	font-size: 20pt;
+	line-height: 8pt;
+	font-weight: bold;
+}
+

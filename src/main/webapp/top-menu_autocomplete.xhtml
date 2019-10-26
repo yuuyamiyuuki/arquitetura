@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<style type="text/css">
+div.ui-menu.ui-menu-dynamic {
+	z-index: 9999 !important;
+}
+
+div.btn-download.ui-splitbutton.ui-buttonset {
+	margin: 10px;
+}
+</style>
+
+	<ul class="nav navbar-nav">
+		<!-- <li class="dropdown messages-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <i class="fa fa-envelope-o"></i>
+                <span class="label label-success">4</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="header align-center">You have 4 messages</li>
+                <li>
+                    <ul class="menu">
+                        <li>
+                            Message 1
+                        </li>
+                        <li>
+                            Message 2
+                        </li>
+                        <li>
+                            Message 3
+                        </li>
+                        <li>
+                            Message 4
+                        </li>
+                    </ul>
+                </li>
+                <li class="footer"><a href="#">See all messages</a></li>
+            </ul>
+        </li> -->
+		<!--  <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <i class="fa fa-bell-o"></i>
+                <span class="label label-warning">2</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="header align-center">You have 2 notifications.</li>
+                <li>
+                    inner menu: contains the actual data
+                    <ul class="menu">
+                        <li>
+                            Notification 1
+                        </li>
+
+                        <li>
+                            Notification 2
+                        </li>
+                    </ul>
+                </li>
+                <li class="footer"><a href="#">See all notifications</a></li>
+            </ul>
+        </li> -->
+		<li class="dropdown user user-menu"><a href="#"
+			class="fa fa-user" data-toggle="dropdown"> <!-- <pe:gravatar id="userImage"
+                             value="nonexisting"/> --> <span
+				class="hidden-xs">#{keycloakBean.nomeLogado}</span>
+		</a>
+			<ul class="dropdown-menu">
+				<li class="user-header">
+					<div class="hidden-xs">
+						<p:graphicImage value="/template/eptcLogo.png"
+							style="border-radius: 30px; width: 55%; padding: 10%; margin: auto;" />
+						<br></br> <span class="hidden-xs">#{keycloakBean.nomeLogado}</span>
+					</div>
+
+				</li>
+				<!--   <li class="user-footer">
+                    <h:form prependId="false">
+                        <div class="pull-left">
+                            <p:commandLink  styleClass="btn btn-danger"  value="Change password"/>
+                        </div>
+                        <div class="pull-right">
+                            <p:commandLink id="logout" action="#{request.logout()}"  title="Logoff">
+                                <i class="fa fa-sign-out fa-2x"></i>
+                            </p:commandLink>
+                            <b:commandButton id="logout" action="/index.xhmtl?faces-redirect=true" actionListener="#{request.logout()}" value="Sair" />
+                        
+                        </div>
+                    </h:form>
+                </li> -->
+			</ul> <!-- <p:commandLink id="logout" action="#{request.logout()}"  title="Logoff">
+                                <i class="fa fa-sign-out fa-2x"></i>
+                            </p:commandLink> --></li>
+
+	</ul>
+
+
+</ui:composition>

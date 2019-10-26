@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"
+	template="/admin.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{demandaBean.id}'/>
+		<f:event type="preRenderView" listener='#{demandaBean.retrieve}'/>
+		<f:viewParam name="page" value='#{parecerBean.page}'/>
+		<f:event type="preRenderView" listener='#{parecerBean.paginate}'/>
+	</f:metadata>
+
+	<ui:define name="title">
+		Sistema de Projetos e Demandas
+	</ui:define>
+
+	<ui:define name="footer"/>
+	
+	 <ui:define name="body">
+		<h3>
+		Escolha uma Opção1
+		</h3>
+		
+		
+		<ui:include src="pages/dashboard/dashboard_sce.xhtml"/>
+		
+	</ui:define>
+
+</ui:composition>
