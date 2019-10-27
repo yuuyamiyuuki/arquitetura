@@ -1,6 +1,7 @@
 package br.com.arquitetura.hotelaria.view;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,33 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.primefaces.event.SelectEvent;
+
+import br.com.arquitetura.hotelaria.model.Funcionario;
+import br.com.arquitetura.hotelaria.model.Quarto;
 import br.com.arquitetura.hotelaria.model.Reserva;
+import br.com.arquitetura.hotelaria.model.Status;
+import br.com.uol.pagseguro.api.common.domain.ShippingType;
+import br.com.uol.pagseguro.api.PagSeguro;
+import br.com.uol.pagseguro.api.PagSeguroEnv;
+import br.com.uol.pagseguro.api.checkout.CheckoutRegistrationBuilder;
+import br.com.uol.pagseguro.api.checkout.RegisteredCheckout;
+import br.com.uol.pagseguro.api.common.domain.builder.AcceptedPaymentMethodsBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.AddressBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.ConfigBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.PaymentItemBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.PaymentMethodBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.PaymentMethodConfigBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.PhoneBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.SenderBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.ShippingBuilder;
+import br.com.uol.pagseguro.api.common.domain.enums.ConfigKey;
+import br.com.uol.pagseguro.api.common.domain.enums.Currency;
+import br.com.uol.pagseguro.api.common.domain.enums.PaymentMethodGroup;
+import br.com.uol.pagseguro.api.common.domain.enums.State;
+import br.com.uol.pagseguro.api.credential.Credential;
+import br.com.uol.pagseguro.api.http.JSEHttpClient;
+import br.com.uol.pagseguro.api.utils.logging.SimpleLoggerFactory;
 
 
 /**
@@ -126,6 +153,7 @@ private Long queryId;
 		try {
 		
 			if (this.id == null) {
+				this.reserva.setStatus(Status.PEDIDO_RESERVA);
 				this.entityManager.persist(this.reserva);		
 				this.conversation.end();
 				return "view?faces-redirect=true&id=" + this.reserva.getId();
@@ -296,5 +324,68 @@ private Long queryId;
 		return added;
 	}
 	
+	public void confirmarReserva()
+	{
+		this.reserva.setStatus(Status.RESERVA);
+		
+	}
 	
+	
+	/*
+	    <b:button styleClass="btn btn-primary" value="Realizar Pagamento"
+						     style=" margin: 0px 0px 0px 10px; font-size:13px;"
+						     target="_blank" iconAwesome="fa-print" href="#{quartoBean.pagamento}"/>
+		                    
+	 */
+	
+	 public String getPagamento()
+	  { 
+	  String sellerEmail = "heian.alien27@gmail.com";
+	  String sellerToken = "C29C620B7C4C4435BD17580A8886D609"; PagSeguro pagSeguro =
+	  PagSeguro.instance(new SimpleLoggerFactory(), new JSEHttpClient(),
+	  Credential.sellerCredential(sellerEmail, sellerToken), PagSeguroEnv.SANDBOX);
+	  
+	  RegisteredCheckout registeredCheckout = pagSeguro.checkouts().register(
+            new CheckoutRegistrationBuilder()
+                .withCurrency(Currency.BRL)
+                .withExtraAmount(BigDecimal.ONE)
+                .withReference("XXXXXX")
+                .addItem(new PaymentItemBuilder()
+                    .withId("0001")
+                    .withDescription("HOTEL - " + this.reserva.getQuarto().getNomeQuarto())
+                    .withAmount(new BigDecimal(this.reserva.getQuarto().getValorDiaria()))
+                    .withQuantity(1)
+                    .withWeight(0))
+                .withAcceptedPaymentMethods(new AcceptedPaymentMethodsBuilder()
+                        .addInclude(new PaymentMethodBuilder()
+                                .withGroup(PaymentMethodGroup.CREDIT_CARD)
+                            )
+                    )
+                .addPaymentMethodConfig(new PaymentMethodConfigBuilder()
+                        .withPaymentMethod(new PaymentMethodBuilder()
+                            .withGroup(PaymentMethodGroup.CREDIT_CARD)
+                        )
+                        .withConfig(new ConfigBuilder()
+                            .withKey(ConfigKey.DISCOUNT_PERCENT)
+                            .withValue(new BigDecimal(10.00))
+                        )
+                    )
+                    .addPaymentMethodConfig(new PaymentMethodConfigBuilder()
+                        .withPaymentMethod(new PaymentMethodBuilder()
+                            .withGroup(PaymentMethodGroup.BANK_SLIP)
+                        )
+                        .withConfig(new ConfigBuilder()
+                            .withKey(ConfigKey.DISCOUNT_PERCENT)
+                            .withValue(new BigDecimal(10.00))
+                        )
+                    ));
+
+	  
+	  System.out.println(registeredCheckout.getRedirectURL());
+	  return registeredCheckout.getRedirectURL();
+	  }
+	
+	 
+	
+
 }

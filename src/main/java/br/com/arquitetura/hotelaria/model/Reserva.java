@@ -35,6 +35,9 @@ public class Reserva implements Serializable {
 	@Column(name ="Data_Checkout")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCheckout;
+	
+	@Column(name ="Status_Reserva")
+	private Status status;
 
 
 	public Long getId() {
@@ -75,6 +78,15 @@ public class Reserva implements Serializable {
 
 	public void setDataCheckout(Date dataCheckout) {
 		this.dataCheckout = dataCheckout;
+	}
+
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override

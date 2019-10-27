@@ -57,8 +57,6 @@
 		<b:button value="Voltar"  outcome="search" styleClass="btn btn-primary" style="font-size:13px;" iconAwesome="fa-undo"/>
 		<b:button  value="Editar"  outcome="create" includeViewParams="true" styleClass="btn btn-primary" 
 		           style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-pencil-square-o"/>  
-		           	           
-		      
 		           <b:commandButton value="Limpar Quarto" action="#{quartoBean.limparQuarto}" rendered="#{!quartoBean.quarto.quartoLimpo}" 
 		           styleClass="btn btn-primary" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-file-o"/>
 		            <b:commandButton value="Disponibilizar Quarto" action="#{quartoBean.disponibilizarQuarto}" rendered="#{!quartoBean.quarto.disponivel}" 

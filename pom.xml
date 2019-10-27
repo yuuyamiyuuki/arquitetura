@@ -147,6 +147,13 @@
     <version>20160810</version>
 </dependency>
 
+<dependency>
+    <groupId>br.com.uol.pagseguro</groupId>
+    <artifactId>pagseguro-api</artifactId>
+    <version>4.3.2</version>
+</dependency>
+
+
 	
 	  
   </dependencies>

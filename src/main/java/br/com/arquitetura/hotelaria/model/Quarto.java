@@ -144,5 +144,10 @@ public class Quarto implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
+   
+	@Override
+	public String toString() {
+		return this.getNomeQuarto();
+	}
+	
 }

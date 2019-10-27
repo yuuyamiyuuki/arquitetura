@@ -1,16 +1,19 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<section class="content-header" style="padding-left: 0px">
 		
-		<p:panel id="panelTitleDashboard" styleClass="box-primary">
-<!-- 			<p:spacer height="15px" /> -->
-<!-- 			<h:form id="test"> -->
-<!-- 				<p:remoteCommand id="rc" name="rc" -->
-<!-- 					action="#{keycloakBean.buscaUser}" /> -->
-<!-- 			</h:form> -->
+		<!-- <p:panel id="panelTitleDashboard" styleClass="box-primary">
+			<p:spacer height="15px" />
+			<h:form id="test">
+				<p:remoteCommand id="rc" name="rc"
+					action="#{keycloakBean.buscaUser}" />
+			</h:form>
 			<p:panelGrid columns="2" columnsClasses="col-md-6, col-md-6"
 				layout="grid">
 				<h:panelGroup>
@@ -46,8 +49,8 @@
 				<h:outputLabel/>
 				
 				<h:panelGroup>
-<!-- 					<p:commandLink -->
-<!-- 						actionListener="#{equipamentoBean.redirecionaPagina}"> -->
+					<p:commandLink
+						actionListener="#{equipamentoBean.redirecionaPagina}">
 						<div class="info-box">
 							<span class="info-box-icon bg-red"><i
 								class="ion ion-wrench"></i></span>
@@ -58,11 +61,78 @@
 								</span>
 							</div>
 						</div>
-<!-- 					</p:commandLink> -->
+					</p:commandLink>
 				</h:panelGroup>
 			</p:panelGrid>
-			<!-- </div> -->
-		</p:panel>
+			</div>
+		</p:panel> -->
+		
+		
+			 <p:panel header="Quartos Disponiveis">     
+				<h:panelGroup>
+				<p:dataTable id="quartoBeanPageItems"
+			 value="#{quartoBean.allDisponivel}" var="_item"
+			 paginatorPosition="bottom"		
+			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+			 paginator="true" rows="10" style="margin: 10px 0px 140px 0px;"
+			 emptyMessage="Registro não encontrado.">
+<!-- 		selection="#{sistemaOperacionalBean.sistemaSelecionado}" -->
+<!-- 					<p:column selectionMode="single" styleClass="align-center" /> -->
+
+					<p:column>
+					<f:facet name="header">
+					<h:outputText value="Nome " />
+					</f:facet>
+					<h:link outcome="/quarto/view">
+					<f:param name="id" value="#{_item.id}" />
+					<div style="text-align: center;">
+					<h:outputText id="_itemNome" value="#{_item.nomeQuarto}" />
+					</div>
+					</h:link>
+					</p:column>
+					
+				    <p:column>
+					<f:facet name="header">
+					<h:outputText value="Valor Diaria" />
+					</f:facet>
+					<h:link outcome="/quarto/view">
+					<f:param name="id" value="#{_item.id}" />
+					<div style="text-align: center;">
+					<h:outputText id="_itemValor" value="#{_item.valorDiaria}" />
+					</div>
+					</h:link>
+					</p:column>
+					
+					  <p:column>
+					<f:facet name="header">
+					<h:outputText value="Disponivel" />
+					</f:facet>
+					<h:link outcome="/quarto/view">
+					<f:param name="id" value="#{_item.id}" />
+					<div style="text-align: center;">
+					<h:outputText id="_itemD" value="#{_item.disponivelSim}" />
+					</div>
+					</h:link>
+					</p:column>
+					
+						  <p:column>
+					<f:facet name="header">
+					<h:outputText value="Limpo" />
+					</f:facet>
+					<h:link outcome="/quarto/view">
+					<f:param name="id" value="#{_item.id}" />
+					<div style="text-align: center;">
+					<h:outputText id="_itemL" value="#{_item.quartoSim}" />
+					</div>
+					</h:link>
+					</p:column>
+					
+					
+				
+			</p:dataTable>
+			</h:panelGroup>
+			</p:panel>
+		
 	</section>
 
 
