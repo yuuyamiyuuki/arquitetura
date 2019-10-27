@@ -316,7 +316,28 @@ private Long queryId;
 	/*
 	 * Support adding children to bidirectional, one-to-many tables
 	 */
-
+      
+	public List<Quarto> getAllDisponivel()
+	{
+		List <Quarto> quartos = this.getAll();
+		List <Quarto> disponiveis = new ArrayList<Quarto>();
+		
+		for (int i =0; i < quartos.size(); i++)
+		{
+			Quarto quarto = quartos.get(i);
+			
+			if (quarto.isDisponivel() == true && quarto.isQuartoLimpo() == true)
+			{
+				disponiveis.add(quarto);	
+			}
+			
+		}
+		
+		return disponiveis;
+		
+	}
+ 	
+	
 	private Quarto add = new Quarto();
 
 	public Quarto getAdd() {
