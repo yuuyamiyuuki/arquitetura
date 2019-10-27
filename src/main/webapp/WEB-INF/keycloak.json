@@ -1,10 +1,13 @@
 {
-  "realm": "urbanismo",
-  "realm-public-key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCfJ5It18npOSMUiYfXHwUz1q2xz5DOfDoUjUDuhaocJ9eT5v/Hs1+f2Fp/8I3XKoRbUk9Cbx90tbhyHRLfTG2Hk5aDbJy3KaF4Vl+L9l8wVPGWGjPbo0VqKGTFr6NthSXjVBfPEXKFKXX4jKBp+TSO65tP7GsQi6+PQ5pZYRQCIwIDAQAB",
-  "auth-server-url": "https://sso-16-des.procempa.com.br/auth",
-  "ssl-required": "none",
-  "resource": "SCE_Homologacao",
+  "realm": "master",
+  "auth-server-url": "http://localhost:8081/auth",
+  "ssl-required": "external",
+  "resource": "HOTELARIA",
+  "verify-token-audience": true,
   "credentials": {
-    "secret": "22304aef-60c3-48e4-84f7-21f002bce99b"
-  }
+    "secret": "b2198c84-56c8-4da8-9d2e-08a337583396"
+  },
+  "use-resource-role-mappings": true,
+  "confidential-port": 0,
+  "policy-enforcer": {}
 }

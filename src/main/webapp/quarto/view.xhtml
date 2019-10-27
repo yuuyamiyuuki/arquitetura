@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"
+	template="/admin.xhtml">
+
+	<f:metadata>
+	<f:viewParam name="id" value='#{quartoBean.id}'/>
+	<f:event type="preRenderView" listener='#{quartoBean.retrieve}'/>
+	<f:event type="preRenderView" listener="#{keycloakBean.buscaUser}"/>
+	</f:metadata>
+<script type="text/javascript" src="resources/js/DesabVoltarNav.js"></script>
+	 <div id="msgAviso" style="display:none;">
+    <span>Não é permitido voltar pelo botão do browser.</span>
+</div>
+
+	<ui:define name="title">
+	<h1 style="font-size:24px; color: #444"><b>Dados do Quarto</b></h1>
+	</ui:define>
+
+	<ui:define name="footer"/>
+	
+	<ui:define name="body">
+	<h:form rendered="#{keycloakBean.role != 'semRole'}">
+	 
+	<p:panel header="Informações" styleClass="box-primary">	 
+	<p:panelGrid columns="2" columnClasses="botaoGrid ui-grid-col-12,botaoGrid ui-grid-col-11" layout="grid">
+	<p:panel styleClass="botaoGrid ui-grid-col-6">
+
+	<p:outputLabel for="quartoBeanNome" value="Nome: &nbsp;"/>
+	<h:outputText id="quartoBeanNome" value="#{quartoBean.quarto.nomeQuarto}"/>
+	<br></br>	
+	
+	<p:outputLabel for="quartoBeanValorDiaria" value="Valor Diaria: &nbsp;"/>
+	<h:outputText id="quartoBeanValorDiaria" value="#{quartoBean.quarto.valorDiaria} R$"/>
+	<br></br>	
+	
+	<p:outputLabel for="quartoBeanDisponivel" value="Disponivel: &nbsp;"/>
+	<h:outputText id="quartoBeanDisponivel" value="#{quartoBean.quarto.disponivelSim}"/>
+	<br></br>
+	
+	<p:outputLabel for="quartoBeanLimpo" value="Limpo: &nbsp;"/>
+	<h:outputText id="quartoBeanLimpo" value="#{quartoBean.quarto.quartoSim}"/>
+	<br></br>
+				
+      </p:panel>
+			</p:panelGrid>
+		
+			
+		<br></br>
+		<p:panelGrid columns="3" styleClass="botaoGrid"  rendered="#{keycloakBean.role == 'funcionario' or keycloakBean.role == 'admin'}">
+		<h:panelGroup>
+		<b:button value="Voltar"  outcome="search" styleClass="btn btn-primary" style="font-size:13px;" iconAwesome="fa-undo"/>
+		<b:button  value="Editar"  outcome="create" includeViewParams="true" styleClass="btn btn-primary" 
+		           style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-pencil-square-o"/>  
+		           <b:commandButton value="Limpar Quarto" action="#{quartoBean.limparQuarto}" rendered="#{!quartoBean.quarto.quartoLimpo}" 
+		           styleClass="btn btn-primary" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-file-o"/>
+		            <b:commandButton value="Disponibilizar Quarto" action="#{quartoBean.disponibilizarQuarto}" rendered="#{!quartoBean.quarto.disponivel}" 
+		           styleClass="btn btn-primary" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-file-o"/>
+		           
+		</h:panelGroup>
+		</p:panelGrid>
+		</p:panel>
+		
+		</h:form>
+	</ui:define>
+</ui:composition>
