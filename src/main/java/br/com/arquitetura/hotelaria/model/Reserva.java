@@ -38,6 +38,13 @@ public class Reserva implements Serializable {
 	
 	@Column(name ="Status_Reserva")
 	private Status status;
+	
+	@Column(name ="Desconto_Reserva")
+	private int desconto;
+	
+	@Column(name="Extras_Reservas")
+	private float extras;
+	
 
 
 	public Long getId() {
@@ -87,6 +94,22 @@ public class Reserva implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+	
+	public int getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(int desconto) {
+		this.desconto = desconto;
+	}
+
+	public float getExtras() {
+		return extras;
+	}
+
+	public void setExtras(float extras) {
+		this.extras = extras;
 	}
 
 	@Override

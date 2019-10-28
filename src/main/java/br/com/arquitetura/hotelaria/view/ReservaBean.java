@@ -345,20 +345,33 @@ private Long queryId;
 	  PagSeguro.instance(new SimpleLoggerFactory(), new JSEHttpClient(),
 	  Credential.sellerCredential(sellerEmail, sellerToken), PagSeguroEnv.SANDBOX);
 	  
+	  int dias = this.reserva.getDataCheckout().getDate() - this.reserva.getDataCheckin().getDate();
+	  float valorDias = (dias * this.reserva.getQuarto().getValorDiaria());
+	  
+	  
 	  RegisteredCheckout registeredCheckout = pagSeguro.checkouts().register(
             new CheckoutRegistrationBuilder()
                 .withCurrency(Currency.BRL)
-                .withExtraAmount(BigDecimal.ONE)
+                .withExtraAmount(new BigDecimal(this.reserva.getExtras()))
                 .withReference("XXXXXX")
                 .addItem(new PaymentItemBuilder()
                     .withId("0001")
                     .withDescription("HOTEL - " + this.reserva.getQuarto().getNomeQuarto())
-                    .withAmount(new BigDecimal(this.reserva.getQuarto().getValorDiaria()))
+                    .withAmount(new BigDecimal(valorDias))
                     .withQuantity(1)
                     .withWeight(0))
                 .withAcceptedPaymentMethods(new AcceptedPaymentMethodsBuilder()
                         .addInclude(new PaymentMethodBuilder()
                                 .withGroup(PaymentMethodGroup.CREDIT_CARD)
+                            )
+                        .addInclude(new PaymentMethodBuilder()
+                                .withGroup(PaymentMethodGroup.ONLINE_DEBIT)
+                            )
+                        .addInclude(new PaymentMethodBuilder()
+                                .withGroup(PaymentMethodGroup.BANK_SLIP)
+                            )
+                        .addInclude(new PaymentMethodBuilder()
+                                .withGroup(PaymentMethodGroup.DEPOSIT)
                             )
                     )
                 .addPaymentMethodConfig(new PaymentMethodConfigBuilder()
@@ -367,7 +380,7 @@ private Long queryId;
                         )
                         .withConfig(new ConfigBuilder()
                             .withKey(ConfigKey.DISCOUNT_PERCENT)
-                            .withValue(new BigDecimal(10.00))
+                            .withValue(new BigDecimal(this.reserva.getDesconto()))
                         )
                     )
                     .addPaymentMethodConfig(new PaymentMethodConfigBuilder()
@@ -376,7 +389,7 @@ private Long queryId;
                         )
                         .withConfig(new ConfigBuilder()
                             .withKey(ConfigKey.DISCOUNT_PERCENT)
-                            .withValue(new BigDecimal(10.00))
+                            .withValue(new BigDecimal(this.reserva.getDesconto()))
                         )
                     ));
 
