@@ -9,8 +9,8 @@
 	template="/admin.xhtml">
 
 	<f:metadata>
-	<f:viewParam name="id" value='#{quartoBean.id}'/>
-	<f:event type="preRenderView" listener='#{quartoBean.retrieve}'/>
+	<f:viewParam name="id" value='#{reservaBean.id}'/>
+	<f:event type="preRenderView" listener='#{reservaBean.retrieve}'/>
 	<f:event type="preRenderView" listener="#{keycloakBean.buscaUser}"/>
 	</f:metadata>
 <script type="text/javascript" src="resources/js/DesabVoltarNav.js"></script>
@@ -31,22 +31,48 @@
 	<p:panelGrid columns="2" columnClasses="botaoGrid ui-grid-col-12,botaoGrid ui-grid-col-11" layout="grid">
 	<p:panel styleClass="botaoGrid ui-grid-col-6">
 
-	<p:outputLabel for="quartoBeanNome" value="Nome: &nbsp;"/>
-	<h:outputText id="quartoBeanNome" value="#{quartoBean.quarto.nomeQuarto}"/>
+	<p:outputLabel for="reservaBeanNome" value="Nome: &nbsp;"/>
+	<h:outputText id="reservaBeanNome" value="#{reservaBean.reserva.quarto.nomeQuarto}"/>
 	<br></br>	
 	
-	<p:outputLabel for="quartoBeanValorDiaria" value="Valor Diaria: &nbsp;"/>
-	<h:outputText id="quartoBeanValorDiaria" value="#{quartoBean.quarto.valorDiaria} R$"/>
+	<p:outputLabel for="reservaBeanValorDiaria" value="Valor Diaria: &nbsp;"/>
+	<h:outputText id="reservaBeanValorDiaria" value="#{reservaBean.reserva.quarto.valorDiaria} R$"/>
 	<br></br>	
-	
-	<p:outputLabel for="quartoBeanDisponivel" value="Disponivel: &nbsp;"/>
-	<h:outputText id="quartoBeanDisponivel" value="#{quartoBean.quarto.disponivelSim}"/>
-	<br></br>
-	
-	<p:outputLabel for="quartoBeanLimpo" value="Limpo: &nbsp;"/>
-	<h:outputText id="quartoBeanLimpo" value="#{quartoBean.quarto.quartoSim}"/>
-	<br></br>
+	 
+	 	<p:outputLabel for="reservaBeanDataCheckin" value="Data de Checkin: &nbsp;"/>
+				<h:outputText id="reservaBeanDataCheckin" value="#{reservaBean.reserva.dataCheckin}">
+				<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+				</h:outputText>
+				<br></br>	
 				
+					<p:outputLabel for="reservaBeanDataCheckout" value="Data de Checkout: &nbsp;"/>
+				<h:outputText id="reservaBeanDataCheckout" value="#{reservaBean.reserva.dataCheckout}">
+				<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+				</h:outputText>
+				<br></br>
+				
+ 		<p:outputLabel for="status" value="Status: &nbsp;"/>
+					<h:outputText id="status" value="#{reservaBean.reserva.statusPagamento}"/>
+					<br></br>	
+	
+		 <p:outputLabel for="reservaBeanTransacao" value="Ultima Transacao: &nbsp;"/>
+	<h:outputText id="reservaBeanTransacao" value="#{reservaBean.reserva.ultimaTransacao}"/>
+	<br></br>		
+				 
+      </p:panel>
+      <p:panel styleClass="botaoGrid ui-grid-col-6" header="Pesquisar Status do pagamento">
+      
+      	<p:outputLabel for="codigo" value="Codigo" />
+              <p:inputText id="codigo"
+							     value="#{reservaBean.example.codigo}"
+							     styleClass="inputBig" />
+					<p:message for="codigo"
+							styleClass="error" />
+	<p:panelGrid columns="3" styleClass="botaoGrid"  rendered="#{keycloakBean.role == 'funcionario' or keycloakBean.role == 'admin'}">
+      <b:commandButton value="Pesquisar" outcome ="index" action ="#{reservaBean.statusPagamento}"  dismiss="modal" update="@form"  styleClass="btn btn-success"
+       style="margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-check"/>
+       </p:panelGrid>
+      
       </p:panel>
 			</p:panelGrid>
 		
@@ -57,11 +83,17 @@
 		<b:button value="Voltar"  outcome="search" styleClass="btn btn-primary" style="font-size:13px;" iconAwesome="fa-undo"/>
 		<b:button  value="Editar"  outcome="create" includeViewParams="true" styleClass="btn btn-primary" 
 		           style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-pencil-square-o"/>  
-		           <b:commandButton value="Limpar Quarto" action="#{quartoBean.limparQuarto}" rendered="#{!quartoBean.quarto.quartoLimpo}" 
-		           styleClass="btn btn-primary" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-file-o"/>
-		            <b:commandButton value="Disponibilizar Quarto" action="#{quartoBean.disponibilizarQuarto}" rendered="#{!quartoBean.quarto.disponivel}" 
-		           styleClass="btn btn-primary" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-file-o"/>
-		           
+		        
+		           <b:button styleClass="btn btn-success" value="Realizar Pagamento" rendered="#{empty reservaBean.reserva.ultimaTransacao}"
+						     style=" margin: 0px 0px 0px 10px; font-size:13px;"
+						     target="_blank" iconAwesome="fa-credit-card" href="#{reservaBean.pagamento}"/> 
+						     
+						      <b:commandButton value="Novo pagamento"
+							 action='#{reservaBean.limparTransacao}'
+							 styleClass="btn btn-primary" style="font-size:13px; margin: 0px 0px 0px 10px;"
+							 iconAwesome="fa-repeat " update="@form" > 
+			</b:commandButton>
+				           
 		</h:panelGroup>
 		</p:panelGrid>
 		</p:panel>

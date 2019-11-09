@@ -54,6 +54,7 @@ import br.com.uol.pagseguro.api.common.domain.enums.PaymentMethodGroup;
 import br.com.uol.pagseguro.api.common.domain.enums.State;
 import br.com.uol.pagseguro.api.credential.Credential;
 import br.com.uol.pagseguro.api.http.JSEHttpClient;
+import br.com.uol.pagseguro.api.transaction.search.TransactionDetail;
 import br.com.uol.pagseguro.api.utils.logging.SimpleLoggerFactory;
 
 
@@ -331,74 +332,115 @@ private Long queryId;
 	}
 	
 	
+		
+	 private String sellerEmail = "heian.alien27@gmail.com";
+	 private   String sellerToken = "C29C620B7C4C4435BD17580A8886D609"; 
+	 private  PagSeguro pagSeguro =
+	  PagSeguro.instance(new SimpleLoggerFactory(), new JSEHttpClient(),
+	  Credential.sellerCredential(sellerEmail, sellerToken), PagSeguroEnv.SANDBOX);
+	 
 	/*
-	    <b:button styleClass="btn btn-primary" value="Realizar Pagamento"
-						     style=" margin: 0px 0px 0px 10px; font-size:13px;"
-						     target="_blank" iconAwesome="fa-print" href="#{quartoBean.pagamento}"/>
-		                    
+	 * public String getPagamento() { String se = new Date().getSeconds()+""; String
+	 * idT = ("Q"+this.reserva.getId()+se); System.out.println(idT);
+	 * 
+	 * 
+	 * int dias = this.reserva.getDataCheckout().getDate() -
+	 * this.reserva.getDataCheckin().getDate(); float valorDias = (dias *
+	 * this.reserva.getQuarto().getValorDiaria());
+	 * 
+	 * 
+	 * RegisteredCheckout registeredCheckout = pagSeguro.checkouts().register( new
+	 * CheckoutRegistrationBuilder() .withCurrency(Currency.BRL)
+	 * .withExtraAmount(new BigDecimal(this.reserva.getExtras()+0))
+	 * .withReference("XXXXXX") .addItem(new PaymentItemBuilder() .withId(idT)
+	 * .withDescription("HOTEL - " + this.reserva.getQuarto().getNomeQuarto())
+	 * .withAmount(new BigDecimal(valorDias)) .withQuantity(1) .withWeight(0))
+	 * .withAcceptedPaymentMethods(new AcceptedPaymentMethodsBuilder()
+	 * .addInclude(new PaymentMethodBuilder()
+	 * .withGroup(PaymentMethodGroup.CREDIT_CARD) ) ) .addPaymentMethodConfig(new
+	 * PaymentMethodConfigBuilder() .withPaymentMethod(new PaymentMethodBuilder()
+	 * .withGroup(PaymentMethodGroup.CREDIT_CARD) ) .withConfig(new ConfigBuilder()
+	 * .withKey(ConfigKey.DISCOUNT_PERCENT) .withValue(new BigDecimal(10.00)) ) )
+	 * .addPaymentMethodConfig(new PaymentMethodConfigBuilder()
+	 * .withPaymentMethod(new PaymentMethodBuilder()
+	 * .withGroup(PaymentMethodGroup.BANK_SLIP) ) .withConfig(new ConfigBuilder()
+	 * .withKey(ConfigKey.DISCOUNT_PERCENT) .withValue(new BigDecimal(10.00)) ) ));
+	 * 
+	 * this.reserva.setUltimaTransacao(idT);
+	 * System.out.println(registeredCheckout.getRedirectURL()); return
+	 * registeredCheckout.getRedirectURL(); }
 	 */
-	
+	 
 	 public String getPagamento()
 	  { 
 	  String sellerEmail = "heian.alien27@gmail.com";
 	  String sellerToken = "C29C620B7C4C4435BD17580A8886D609"; PagSeguro pagSeguro =
 	  PagSeguro.instance(new SimpleLoggerFactory(), new JSEHttpClient(),
 	  Credential.sellerCredential(sellerEmail, sellerToken), PagSeguroEnv.SANDBOX);
-	  
-	  int dias = this.reserva.getDataCheckout().getDate() - this.reserva.getDataCheckin().getDate();
-	  float valorDias = (dias * this.reserva.getQuarto().getValorDiaria());
-	  
+	     String se = new Date().getSeconds()+""; 
+		 String idT = ("Q"+this.reserva.getId()+se); System.out.println(idT); 
+		 int dias = this.reserva.getDataCheckout().getDate() -
+		  this.reserva.getDataCheckin().getDate(); float valorDias = (dias *
+		 this.reserva.getQuarto().getValorDiaria());
 	  
 	  RegisteredCheckout registeredCheckout = pagSeguro.checkouts().register(
-            new CheckoutRegistrationBuilder()
-                .withCurrency(Currency.BRL)
-                .withExtraAmount(new BigDecimal(this.reserva.getExtras()))
-                .withReference("XXXXXX")
-                .addItem(new PaymentItemBuilder()
-                    .withId("0001")
-                    .withDescription("HOTEL - " + this.reserva.getQuarto().getNomeQuarto())
-                    .withAmount(new BigDecimal(valorDias))
-                    .withQuantity(1)
-                    .withWeight(0))
-                .withAcceptedPaymentMethods(new AcceptedPaymentMethodsBuilder()
-                        .addInclude(new PaymentMethodBuilder()
-                                .withGroup(PaymentMethodGroup.CREDIT_CARD)
-                            )
-                        .addInclude(new PaymentMethodBuilder()
-                                .withGroup(PaymentMethodGroup.ONLINE_DEBIT)
-                            )
-                        .addInclude(new PaymentMethodBuilder()
-                                .withGroup(PaymentMethodGroup.BANK_SLIP)
-                            )
-                        .addInclude(new PaymentMethodBuilder()
-                                .withGroup(PaymentMethodGroup.DEPOSIT)
-                            )
-                    )
-                .addPaymentMethodConfig(new PaymentMethodConfigBuilder()
-                        .withPaymentMethod(new PaymentMethodBuilder()
-                            .withGroup(PaymentMethodGroup.CREDIT_CARD)
-                        )
-                        .withConfig(new ConfigBuilder()
-                            .withKey(ConfigKey.DISCOUNT_PERCENT)
-                            .withValue(new BigDecimal(this.reserva.getDesconto()))
-                        )
-                    )
-                    .addPaymentMethodConfig(new PaymentMethodConfigBuilder()
-                        .withPaymentMethod(new PaymentMethodBuilder()
-                            .withGroup(PaymentMethodGroup.BANK_SLIP)
-                        )
-                        .withConfig(new ConfigBuilder()
-                            .withKey(ConfigKey.DISCOUNT_PERCENT)
-                            .withValue(new BigDecimal(this.reserva.getDesconto()))
-                        )
-                    ));
+           new CheckoutRegistrationBuilder()
+               .withCurrency(Currency.BRL)
+               .withExtraAmount(BigDecimal.ONE)
+               .withReference("XXXXXX")
+               .addItem(new PaymentItemBuilder()
+                   .withId(idT)
+                   .withDescription("HOTEL - " + this.reserva.getQuarto().getNomeQuarto())
+                   .withAmount(new BigDecimal(this.reserva.getQuarto().getValorDiaria()))
+                   .withQuantity(1)
+                   .withWeight(0))
+               .withAcceptedPaymentMethods(new AcceptedPaymentMethodsBuilder()
+                       .addInclude(new PaymentMethodBuilder()
+                               .withGroup(PaymentMethodGroup.CREDIT_CARD)
+                           )
+                   )
+               .addPaymentMethodConfig(new PaymentMethodConfigBuilder()
+                       .withPaymentMethod(new PaymentMethodBuilder()
+                           .withGroup(PaymentMethodGroup.CREDIT_CARD)
+                       )
+                       .withConfig(new ConfigBuilder()
+                           .withKey(ConfigKey.DISCOUNT_PERCENT)
+                           .withValue(new BigDecimal(10.00))
+                       )
+                   )
+                   .addPaymentMethodConfig(new PaymentMethodConfigBuilder()
+                       .withPaymentMethod(new PaymentMethodBuilder()
+                           .withGroup(PaymentMethodGroup.BANK_SLIP)
+                       )
+                       .withConfig(new ConfigBuilder()
+                           .withKey(ConfigKey.DISCOUNT_PERCENT)
+                           .withValue(new BigDecimal(10.00))
+                       )
+                   ));
 
 	  
 	  System.out.println(registeredCheckout.getRedirectURL());
+	  this.reserva.setUltimaTransacao(registeredCheckout.getCheckoutCode());
 	  return registeredCheckout.getRedirectURL();
 	  }
-	
 	 
+	 public void statusPagamento()
+	 {      
+		 if(this.reserva.getUltimaTransacao() != null)
+		 {
+		 String code = this.example.getCodigo();
+		 
+			 System.out.println(this.reserva.getUltimaTransacao());
+			 System.out.println(code);
+			 TransactionDetail transaction = pagSeguro.transactions().search().byCode(code);
+		 this.reserva.setStatusPagamento(transaction.getStatus().getStatus().name());
+		 }
+		 }
+	 
+	 public void limparTransacao()// caso seja necessario um novo pagamento/status cancelado
+	 {
+		 this.reserva.setUltimaTransacao(null);
+	 }
 	
 
 }

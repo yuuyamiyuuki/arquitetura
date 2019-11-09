@@ -45,7 +45,17 @@ public class Reserva implements Serializable {
 	@Column(name="Extras_Reservas")
 	private float extras;
 	
-
+	@Column(name="Reserva_Paga")
+	private Boolean reservaPaga;
+	
+	@Column(name="Ultima_Transcancao")
+	private String ultimaTransacao;
+	
+	@Column(name="Status_Pagamento")
+	private String statusPagamento;
+	
+	@Transient
+	private String codigo;
 
 	public Long getId() {
 		return id;
@@ -112,6 +122,30 @@ public class Reserva implements Serializable {
 		this.extras = extras;
 	}
 
+	public String getUltimaTransacao() {
+		return ultimaTransacao;
+	}
+
+	public void setUltimaTransacao(String ultimaTransacao) {
+		this.ultimaTransacao = ultimaTransacao;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	
+	public String getStatusPagamento() {
+		return statusPagamento;
+	}
+
+	public void setStatusPagamento(String statusPagamento) {
+		this.statusPagamento = statusPagamento;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -129,6 +163,14 @@ public class Reserva implements Serializable {
 		return true;
 	}
 	
+	public Boolean getReservaPaga() {
+		return reservaPaga;
+	}
+
+	public void setReservaPaga(Boolean reservaPaga) {
+		this.reservaPaga = reservaPaga;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
