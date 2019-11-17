@@ -11,6 +11,7 @@
 	<f:metadata>
 	<f:viewParam name="id" value='#{reservaBean.id}'/>
 	<f:event type="preRenderView" listener='#{reservaBean.retrieve}'/>
+ 	<!--  <f:event type="preRenderView" listener='#{reservaBean.testePag}'/>  -->
 	<f:event type="preRenderView" listener="#{keycloakBean.buscaUser}"/>
 	</f:metadata>
 <script type="text/javascript" src="resources/js/DesabVoltarNav.js"></script>
@@ -51,6 +52,14 @@
 				</h:outputText>
 				<br></br>
 				
+					<p:outputLabel for="reservaExtras" value="Extras: &nbsp;"/>
+					<h:outputText id="reservaExtras" value="#{reservaBean.reserva.extras} R$"/>
+					<br></br>	
+					
+					<p:outputLabel for="reservaDesconto" value="Desconto: &nbsp;"/>
+					<h:outputText id="reservaDesconto" value="#{reservaBean.reserva.desconto} %"/>
+					<br></br>	
+				
  		<p:outputLabel for="status" value="Status: &nbsp;"/>
 					<h:outputText id="status" value="#{reservaBean.reserva.statusPagamento}"/>
 					<br></br>	
@@ -62,12 +71,12 @@
       </p:panel>
       <p:panel styleClass="botaoGrid ui-grid-col-6" header="Pesquisar Status do pagamento">
       
-      	<p:outputLabel for="codigo" value="Codigo" />
+      	<p:outputLabel for="codigo" value="Codigo da Transação" />
               <p:inputText id="codigo"
 							     value="#{reservaBean.example.codigo}"
 							     styleClass="inputBig" />
 					<p:message for="codigo"
-							styleClass="error" />
+							styleClass="error" /> 
 	<p:panelGrid columns="3" styleClass="botaoGrid"  rendered="#{keycloakBean.role == 'funcionario' or keycloakBean.role == 'admin'}">
       <b:commandButton value="Pesquisar" outcome ="index" action ="#{reservaBean.statusPagamento}"  dismiss="modal" update="@form"  styleClass="btn btn-success"
        style="margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-check"/>

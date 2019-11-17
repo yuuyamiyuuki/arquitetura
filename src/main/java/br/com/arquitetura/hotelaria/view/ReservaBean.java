@@ -34,6 +34,7 @@ import br.com.arquitetura.hotelaria.model.Funcionario;
 import br.com.arquitetura.hotelaria.model.Quarto;
 import br.com.arquitetura.hotelaria.model.Reserva;
 import br.com.arquitetura.hotelaria.model.Status;
+import br.com.uol.pagseguro.api.common.domain.DataList;
 import br.com.uol.pagseguro.api.common.domain.ShippingType;
 import br.com.uol.pagseguro.api.PagSeguro;
 import br.com.uol.pagseguro.api.PagSeguroEnv;
@@ -55,6 +56,7 @@ import br.com.uol.pagseguro.api.common.domain.enums.State;
 import br.com.uol.pagseguro.api.credential.Credential;
 import br.com.uol.pagseguro.api.http.JSEHttpClient;
 import br.com.uol.pagseguro.api.transaction.search.TransactionDetail;
+import br.com.uol.pagseguro.api.transaction.search.TransactionSummary;
 import br.com.uol.pagseguro.api.utils.logging.SimpleLoggerFactory;
 
 
@@ -374,24 +376,33 @@ private Long queryId;
 	 public String getPagamento()
 	  { 
 	  String sellerEmail = "heian.alien27@gmail.com";
-	  String sellerToken = "C29C620B7C4C4435BD17580A8886D609"; PagSeguro pagSeguro =
-	  PagSeguro.instance(new SimpleLoggerFactory(), new JSEHttpClient(),
+	  String sellerToken = "C29C620B7C4C4435BD17580A8886D609"; 
+	  PagSeguro pagSeguro = PagSeguro.instance(new SimpleLoggerFactory(), new JSEHttpClient(),
 	  Credential.sellerCredential(sellerEmail, sellerToken), PagSeguroEnv.SANDBOX);
 	     String se = new Date().getSeconds()+""; 
 		 String idT = ("Q"+this.reserva.getId()+se); System.out.println(idT); 
-		 int dias = this.reserva.getDataCheckout().getDate() -
-		  this.reserva.getDataCheckin().getDate(); float valorDias = (dias *
-		 this.reserva.getQuarto().getValorDiaria());
+		 
+		 int dias = this.reserva.getDataCheckout().getDate() - this.reserva.getDataCheckin().getDate();
+		 System.out.println(dias);
+		 
+		 if(dias ==0)
+		 {
+			 dias = 1 ;
+		 }
+		 
+		 
+		 
+		 float valorDias = (dias *this.reserva.getQuarto().getValorDiaria());
 	  
 	  RegisteredCheckout registeredCheckout = pagSeguro.checkouts().register(
            new CheckoutRegistrationBuilder()
                .withCurrency(Currency.BRL)
-               .withExtraAmount(BigDecimal.ONE)
-               .withReference("XXXXXX")
+               .withExtraAmount(new BigDecimal(this.reserva.getExtras()))     
+               .withReference(idT)
                .addItem(new PaymentItemBuilder()
                    .withId(idT)
-                   .withDescription("HOTEL - " + this.reserva.getQuarto().getNomeQuarto())
-                   .withAmount(new BigDecimal(this.reserva.getQuarto().getValorDiaria()))
+                   .withDescription("HOTEL - " + valorDias)
+                   .withAmount(new BigDecimal(valorDias))
                    .withQuantity(1)
                    .withWeight(0))
                .withAcceptedPaymentMethods(new AcceptedPaymentMethodsBuilder()
@@ -405,22 +416,13 @@ private Long queryId;
                        )
                        .withConfig(new ConfigBuilder()
                            .withKey(ConfigKey.DISCOUNT_PERCENT)
-                           .withValue(new BigDecimal(10.00))
-                       )
-                   )
-                   .addPaymentMethodConfig(new PaymentMethodConfigBuilder()
-                       .withPaymentMethod(new PaymentMethodBuilder()
-                           .withGroup(PaymentMethodGroup.BANK_SLIP)
-                       )
-                       .withConfig(new ConfigBuilder()
-                           .withKey(ConfigKey.DISCOUNT_PERCENT)
-                           .withValue(new BigDecimal(10.00))
+                           .withValue(new BigDecimal(this.reserva.getDesconto()))
                        )
                    ));
 
 	  
 	  System.out.println(registeredCheckout.getRedirectURL());
-	  this.reserva.setUltimaTransacao(registeredCheckout.getCheckoutCode());
+	  this.reserva.setUltimaTransacao(idT);
 	  return registeredCheckout.getRedirectURL();
 	  }
 	 
@@ -436,6 +438,21 @@ private Long queryId;
 		 this.reserva.setStatusPagamento(transaction.getStatus().getStatus().name());
 		 }
 		 }
+	 
+	 public void testePag()
+	 {
+		 final DataList<? extends TransactionSummary> transactionDate = pagSeguro
+					.transactions().search().byReference(this.reserva.getUltimaTransacao());
+		 System.out.println(transactionDate.toString());
+		 for (int i = 0; i < transactionDate.getData().size(); i++)
+		 {
+			 System.out.println(transactionDate.getData().get(i).getStatus().getStatus().name());
+		 }
+		/*String codigo = transactionDate.getData().get(0).getStatus().getStatus().name();
+		System.out.println("codigo:" + codigo);*/
+		 
+	 }
+			 
 	 
 	 public void limparTransacao()// caso seja necessario um novo pagamento/status cancelado
 	 {

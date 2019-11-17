@@ -9,9 +9,9 @@
     xmlns:p="http://primefaces.org/ui"
 	template="/admin.xhtml">
 	<f:metadata>
-	<f:viewParam name="page" value='#{quartoBean.page}' />
+	<f:viewParam name="page" value='#{reservaBean.page}' />
 <!-- 	<f:event type="preRenderView"
-			 listener='#{quartoBean.paginate}' /> -->
+			 listener='#{reservaBean.paginate}' /> -->
 	<f:event type="preRenderView" listener="#{keycloakBean.buscaUser}" />
 	</f:metadata>
 <script type="text/javascript" src="resources/js/DesabVoltarNav.js"></script>
@@ -34,55 +34,10 @@
 
 	<p:panelGrid columns="6" columnClasses="botaoGrid ui-grid-col-2,botaoGrid ui-grid-col-4,botaoGrid ui-grid-col-2,botaoGrid ui-grid-col-2, botaoGrid ui-grid-col-4,botaoGrid ui-grid-col-2, botaoGrid " layout="grid">
 							
-					      <p:outputLabel for="quartoBeanExampleNome"
-                                         value="Nome:" />
-                          <h:panelGroup>
-                          <p:inputText id="quartoBeanExampleNome"
-                                       value="#{quartoBean.example.nomeQuarto}"
-                                       styleClass="inputBig" />
-                          <h:message for="quartoBeanExampleNome"
-                                     styleClass="error" />
-                          </h:panelGroup>
-                          <h:outputText/>
-				
-				<!--  -->
-				   
-                         	<p:outputLabel for="quartoBeanValor" value="Valor da Diaria" />
-					<h:panelGroup>
-					<p:inputNumber id="quartoBeanValor"
-							     value="#{quartoBean.example.valorDiaria}" symbol=" R$" symbolPosition="s" 
-                               decimalSeparator="," thousandSeparator="."
-							     styleClass="inputBig"/>
-					<p:message for="quartoBeanValor"
-							styleClass="error" />
-					</h:panelGroup>
-					<h:outputText />
-		
+
                 <!--  -->
 
-                          <p:outputLabel for="quartoBeanDisponivel" value="Disponivel" />			  
-                          <h:panelGroup>
-                          <p:selectOneRadio id="quartoBeanDisponivel" value="#{quartoBean.example.disponivelPesquisa}" checked = "false">
-                          <f:selectItem itemLabel = "Todos" itemValue = "Todos" />
-                          <f:selectItem itemLabel = "Sim" itemValue = "Sim"  />
-                          <f:selectItem itemLabel = "Não" itemValue = "Nao" />  
-                          </p:selectOneRadio>
-                          <h:message for="quartoBeanDisponivel" styleClass="error"/> 
-                                 </h:panelGroup>
-                                 <h:outputText />
-		
-                          
-                          
-                          <p:outputLabel for="quartoBeanLimpo" value="Limpo" />			  
-                          <h:panelGroup>
-                          <p:selectOneRadio id="quartoBeanLimpo" value="#{quartoBean.example.quartoPesquisa}" checked = "false">
-                          <f:selectItem itemLabel = "Todos" itemValue = "Todos" />
-                          <f:selectItem itemLabel = "Sim" itemValue = "Sim"  />
-                          <f:selectItem itemLabel = "Não" itemValue = "Nao" />  
-                          </p:selectOneRadio>
-                          <h:message for="quartoBeanLimpo" styleClass="error"/> 
-                         </h:panelGroup>
-
+                     
                   
                 <!--  -->
 							<h:outputText />
@@ -96,8 +51,8 @@
 						  <br></br>
 						  <p:panelGrid columns="1" styleClass="botaoGrid">
 						  <h:panelGroup>
-						<b:commandButton id="pesquisa" value="Pesquisar" action='#{quartoBean.search}' styleClass="btn btn-primary" style="font-size:13px;" iconAwesome="fa-search"
-						actionListener='#{quartoBean.paginate}' />
+						<b:commandButton id="pesquisa" value="Pesquisar" action='#{reservaBean.search}' styleClass="btn btn-primary" style="font-size:13px;" iconAwesome="fa-search"
+						actionListener='#{reservaBean.paginate}' />
 						  <b:commandButton value="Limpar" styleClass="btn btn-primary" 	
 						                   style=" margin: 0px 0px 0px 10px; 
 							               font-size:13px;" iconAwesome="fa-search-minus">
@@ -122,8 +77,8 @@
 
 <br></br>
 <p:panel styleClass="box-primary">
-<p:dataTable id="quartoBeanPageItems"
-			 value="#{quartoBean.pageItems}" var="_item"
+<p:dataTable id="reservaBeanPageItems"
+			 value="#{reservaBean.pageItems}" var="_item"
 			 paginatorPosition="bottom"		
 			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 			 paginator="true" rows="10" style="margin: 10px 0px 140px 0px;"
@@ -135,12 +90,12 @@
 
 					<p:column>
 					<f:facet name="header">
-					<h:outputText value="Nome " />
+					<h:outputText value="Nome do Quarto" />
 					</f:facet>
-					<h:link outcome="/quarto/view">
+					<h:link outcome="/reserva/view">
 					<f:param name="id" value="#{_item.id}" />
 					<div style="text-align: center;">
-					<h:outputText id="_itemNome" value="#{_item.nomeQuarto}" />
+					<h:outputText id="_itemNome" value="#{_item.quarto.nomeQuarto}" />
 					</div>
 					</h:link>
 					</p:column>
@@ -149,37 +104,15 @@
 					<f:facet name="header">
 					<h:outputText value="Valor Diaria" />
 					</f:facet>
-					<h:link outcome="/quarto/view">
+					<h:link outcome="/reserva/view">
 					<f:param name="id" value="#{_item.id}" />
 					<div style="text-align: center;">
-					<h:outputText id="_itemValor" value="#{_item.valorDiaria}" />
+					<h:outputText id="_itemValor" value="#{_item.quarto.valorDiaria}" />
 					</div>
 					</h:link>
 					</p:column>
 					
-					  <p:column>
-					<f:facet name="header">
-					<h:outputText value="Disponivel" />
-					</f:facet>
-					<h:link outcome="/quarto/view">
-					<f:param name="id" value="#{_item.id}" />
-					<div style="text-align: center;">
-					<h:outputText id="_itemD" value="#{_item.disponivelSim}" />
-					</div>
-					</h:link>
-					</p:column>
-					
-						  <p:column>
-					<f:facet name="header">
-					<h:outputText value="Limpo" />
-					</f:facet>
-					<h:link outcome="/quarto/view">
-					<f:param name="id" value="#{_item.id}" />
-					<div style="text-align: center;">
-					<h:outputText id="_itemL" value="#{_item.quartoSim}" />
-					</div>
-					</h:link>
-					</p:column>
+				
 					
 					
 				

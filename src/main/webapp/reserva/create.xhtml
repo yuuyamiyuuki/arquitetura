@@ -81,6 +81,29 @@
                                  </h:panelGroup>
                                  <h:outputText value="*" styleClass="required" /> 
                                  
+                                 	<p:outputLabel for="reservaExtras" value="Extras" />
+					<h:panelGroup>
+					<p:inputNumber id="reservaExtras"
+							     required="true"
+							     value="#{reservaBean.reserva.extras}" symbol="%" symbolPosition="s" 
+                               decimalSeparator="," thousandSeparator="."
+							     styleClass="inputBig" requiredMessage="Campo Obrigatório"/>
+					<p:message for="reservaExtras"
+							styleClass="error" />
+					</h:panelGroup>
+					<h:outputText value="*" styleClass="required" />
+					
+						<p:outputLabel for="reservaDesconto" value="Descontos" />
+					<h:panelGroup>
+					<p:inputNumber id="reservaDesconto"
+							     required="true"
+							     value="#{reservaBean.reserva.desconto}" symbol="%" symbolPosition="s" 
+                               decimalSeparator="," thousandSeparator="."
+							     styleClass="inputBig" requiredMessage="Campo Obrigatório"/>
+					<p:message for="reservaDesconto"
+							styleClass="error" />
+					</h:panelGroup>
+					<h:outputText value="*" styleClass="required" />
 			
 				<!--  -->
 				

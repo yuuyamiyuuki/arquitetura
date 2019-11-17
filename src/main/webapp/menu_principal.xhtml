@@ -54,6 +54,28 @@
 										<span>Consultar</span>
 									</p:link></li>
 							</ul></li>
+							
+							<li class="treeview"><a href="#"> <i class="fa fa-tags"></i>
+								<span> Reservas</span> <span
+								class="pull-right-container"><i
+									class="fa fa-angle-left pull-right"></i> </span>
+						</a>
+							<ul class="treeview-menu">
+								<li><p:link
+										href="/reserva/create.xhtml"
+										title="Adiciona Tipo Equipamento"
+										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+										<i class="fa fa-plus"></i>
+										<span>Adicionar</span>
+									</p:link></li>
+								<li><p:link
+										href="/reserva/search.xhtml"
+										title="Consulta Tipo Equipamento"
+										rendered="#{keycloakBean.role != 'semRole'}">
+										<i class="fa fa-search"></i>
+										<span>Consultar</span>
+									</p:link></li>
+							</ul></li>
 						
 						
 
