@@ -225,86 +225,20 @@ private Long queryId;
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		/*
-		 * String nome = this.example.getNome(); if (nome != null && !"".equals(nome)) {
-		 * predicatesList.add(builder.like( builder.lower(root.<String> get("nome")),
-		 * '%' + nome.toLowerCase().trim() + '%')); }
-		 * 
-		 * 
-		 * Date dataNascimento = this.example.getDataNascimento(); if (dataNascimento
-		 * !=null && !"".equals(dataNascimento)) {
-		 * predicatesList.add(builder.equal(root.get("dataNascimento"),
-		 * dataNascimento)); }
-		 * 
-		 * String rg = this.example.getRg(); if (rg != null && !"".equals(rg)) {
-		 * predicatesList.add(builder.like( builder.lower(root.<String> get("rg")), '%'
-		 * + rg.toLowerCase().trim() + '%')); }
-		 * 
-		 * String cpf = this.example.getCpf().replace(".", "").replace("-", "");
-		 * System.out.println(cpf); if (cpf != null && !"".equals(cpf)) {
-		 * predicatesList.add(builder.like( builder.lower(root.<String> get("cpf")), '%'
-		 * + cpf.toLowerCase().trim() + '%')); }
-		 * 
-		 * String nomeMae = this.example.getNomeMae(); if (nomeMae != null &&
-		 * !"".equals(nomeMae)) { predicatesList.add(builder.like(
-		 * builder.lower(root.<String> get("nomeMae")), '%' +
-		 * nomeMae.toLowerCase().trim() + '%')); }
-		 * 
-		 * 
-		 * String telefone = this.example.getTelefone(); if (telefone != null &&
-		 * !"".equals(telefone)) { predicatesList.add(builder.like(
-		 * builder.lower(root.<String> get("telefone")), '%' +
-		 * telefone.toLowerCase().trim() + '%')); }
-		 * 
-		 * String telefoneFixo = this.example.getTelefoneFixo(); if (telefoneFixo !=
-		 * null && !"".equals(telefoneFixo)) { predicatesList.add(builder.like(
-		 * builder.lower(root.<String> get("telefoneFixo")), '%' +
-		 * telefoneFixo.toLowerCase() + '%')); }
-		 * 
-		 * 
-		 * String ativoTodos = this.example.getAtivoTodos();
-		 * 
-		 * 
-		 * if (ativoTodos != null && !"".equals(ativoTodos)) { if
-		 * (ativoTodos.equals("Sim")) {
-		 * predicatesList.add(builder.equal(root.get("ativo"), true)); } else if
-		 * (ativoTodos.equals("Nao")) {
-		 * predicatesList.add(builder.equal(root.get("ativo"), false)); } }
-		 * 
-		 * 
-		 * //antiga EnderecoBean
-		 * 
-		 * String endNomeLogradouro = this.example.getNomeLogradouro(); if
-		 * (endNomeLogradouro != null && !"".equals(endNomeLogradouro)) {
-		 * predicatesList.add(builder.like( builder.lower(root.<String>
-		 * get("endNomeLogradouro")), '%' + endNomeLogradouro.toLowerCase() + '%')); }
-		 * Integer endNumero = this.example.getNumero(); if (endNumero != null) {
-		 * predicatesList.add(builder.equal(root.get("endNumero"), endNumero)); }
-		 * 
-		 * String endComplemento = this.example.getComplemento(); if (endComplemento !=
-		 * null && !"".equals(endComplemento)) { predicatesList.add(builder.like(
-		 * builder.lower(root.<String> get("endComplemento")), '%' +
-		 * endComplemento.toLowerCase() + '%')); }
-		 * 
-		 * String endBairro = this.example.getBairro(); if (endBairro != null &&
-		 * !"".equals(endBairro)) { predicatesList.add(builder.like(
-		 * builder.lower(root.<String> get("endBairro")), '%' + endBairro.toLowerCase()
-		 * + '%')); }
-		 * 
-		 * String endCidade = this.example.getCidade(); if (endCidade != null &&
-		 * !"".equals(endCidade)) { predicatesList.add(builder.like(
-		 * builder.lower(root.<String> get("endCidade")), '%' + endCidade.toLowerCase()
-		 * + '%')); }
-		 * 
-		 * String endUf = this.example.getUf(); if (endUf != null && !"".equals(endUf))
-		 * { predicatesList.add(builder.like( builder.lower(root.<String> get("endUf")),
-		 * '%' + endUf.toLowerCase() + '%')); }
-		 * 
-		 * String endCep = this.example.getCep(); if (endCep != null &&
-		 * !"".equals(endCep)) { predicatesList.add(builder.like(
-		 * builder.lower(root.<String> get("endCep")), '%' + endCep.toLowerCase() +
-		 * '%')); }
-		 */
+		
+		  String nomePeca = this.example.getNomePeca(); if (nomePeca != null && !"".equals(nomePeca)) {
+		  predicatesList.add(builder.like( builder.lower(root.<String> get("nomePeca")),
+		  '%' + nomePeca.toLowerCase().trim() + '%')); }
+		  
+		  String tipoPecas = this.example.getTipoPecas(); if (tipoPecas != null && !"".equals(tipoPecas)) {
+			  predicatesList.add(builder.like( builder.lower(root.<String> get("tipoPecas")),
+			  '%' + tipoPecas.toLowerCase().trim() + '%')); }
+		  
+		  String situacaoPeca = this.example.getSituacaoPeca(); if (situacaoPeca != null && !"".equals(situacaoPeca)) {
+			  predicatesList.add(builder.like( builder.lower(root.<String> get("situacaoPeca")),
+			  '%' + situacaoPeca.toLowerCase().trim() + '%')); }
+
+		 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 

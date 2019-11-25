@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+	template="/admin.xhtml">
+
+	<f:metadata>
+	<f:viewParam name="id" value='#{pecasEquipamentoBean.id}' />
+	<f:event type="preRenderView"
+			listener='#{pecasEquipamentoBean.retrieve}' />
+	<f:event type="preRenderView" listener="#{keycloakBean.buscaUser}" />
+	
+	</f:metadata>
+<script type="text/javascript" src="resources/js/DesabVoltarNav.js"></script>
+	 <div id="msgAviso" style="display:none;">
+    <span>Não é permitido voltar pelo botão do browser.</span>
+</div>
+
+	<ui:define name="title">
+	<c:choose>
+	<c:when test='#{!empty pecasEquipamentosBean.id}'>
+	<h1 style="font-size: 20px; color: #444">
+					Editar Dados da Peça/Equipamento
+	</h1>
+	</c:when>
+	<c:otherwise>
+	<h1 style="font-size: 20px; color: #444">
+					 Adicionar Dados da Peça/Equipamento	</h1>
+	</c:otherwise>
+	</c:choose>
+	</ui:define>
+
+	<ui:define name="body">
+	<h:form id="create">
+
+	<p:panel header="Dados do Quarto"
+			 styleClass="box-primary"
+			 rendered="#{keycloakBean.role == 'funcionario' or keycloakBean.role == 'admin'}">
+				
+
+	<p:panelGrid columns="3"
+				 columnClasses="botaoGrid ui-grid-col-2,botaoGrid ui-grid-col-6, botaoGrid ui-grid-col-4"
+				 layout="grid">
+					
+				
+					
+					<p:outputLabel for="pecasEquipamentosBeanNome" value="Nome: " />
+					<h:panelGroup>
+					<p:inputText id="pecasEquipamentosBeanNome"
+							     required="true"
+							     value="#{pecasEquipamentoBean.pecasEquipamento.nomePeca}"
+							     styleClass="inputBig" requiredMessage="Campo Obrigatório"/>
+					<p:message for="pecasEquipamentosBeanNome"
+							styleClass="error" />
+					</h:panelGroup>
+					<h:outputText value="*" styleClass="required" />
+					
+						<p:outputLabel for="pecasEquipamentosBeanTipo" value="Tipo" />
+					<h:panelGroup>
+					 <p:selectOneMenu id="pecasEquipamentosBeanTipo"  value="#{pecasEquipamentoBean.pecasEquipamento.tipoPecas}">
+            <f:selectItem itemLabel="" itemValue="" />
+            <f:selectItem itemLabel="Peça" itemValue="Peça" />
+            <f:selectItem itemLabel="Equipamento" itemValue="Equipamento" />
+            </p:selectOneMenu>
+            </h:panelGroup>
+					<h:outputText value="*" styleClass="required" />
+					
+						
+						<p:outputLabel for="pecasEquipamentosBeanSituacao" value="Situação" />
+					<h:panelGroup>
+					 <p:selectOneMenu id="pecasEquipamentosBeanSituacao"  value="#{pecasEquipamentoBean.pecasEquipamento.tipoPecas}">
+            <f:selectItem itemLabel="" itemValue="" />
+            <f:selectItem itemLabel="OK" itemValue="Ok" />
+            <f:selectItem itemLabel="Necessita Manutenção" itemValue="Necessita Manutenção" />
+            <f:selectItem itemLabel="Quebrada" itemValue="Quebrada" />
+            </p:selectOneMenu>
+            </h:panelGroup>
+					<h:outputText value="*" styleClass="required" />
+					
+					
+					
+					
+				<!--  -->
+				
+					</p:panelGrid>
+					
+
+				<p:panelGrid columns="1" styleClass="botaoGrid">
+				<h:panelGroup styleClass="buttons">
+                <b:commandButton value="Salvar"
+							     action='#{pecasEquipamentoBean.update}'
+							     styleClass="btn btn-primary" style="font-size:13px;"
+							     iconAwesome="fa-floppy-o" update="@form"/> 
+				<c:choose>
+				<c:when test='#{empty pecasEquipamentoBean.id}'>             
+                </c:when>
+                </c:choose>
+                      
+				<c:choose>
+				<c:when test='#{!empty pecasEquipamentoBean.id}'>
+				<b:button value="Cancelar" outcome="view"
+						  styleClass="btn btn-primary"
+						  style=" margin: 0px 0px 0px 10px; font-size:13px;"
+						  iconAwesome="fa-times">
+				<f:param name="id" value='#{pecasEquipamentosBean.id}' />
+				</b:button>
+								<!-- <b:commandButton value="Excluir" action='#{tipoEquipamentoBean.delete}' styleClass="btn btn-primary" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-file-o"/> -->
+				</c:when>
+				<c:otherwise>
+				<b:button value="Cancelar" outcome="search"
+						  styleClass="btn btn-primary"
+						  style=" margin: 0px 0px 0px 10px; font-size:13px;"
+						  iconAwesome="fa-times" />
+				</c:otherwise>
+				</c:choose>
+				</h:panelGroup>
+				</p:panelGrid>
+			    </p:panel>
+
+</h:form>
+</ui:define>
+
+</ui:composition>

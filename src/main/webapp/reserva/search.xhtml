@@ -36,8 +36,39 @@
 							
 
                 <!--  -->
-
-                     
+                               <p:outputLabel for="reservaBeanNome" value="Quarto:"/>
+				 <h:panelGroup>
+				 <p:selectOneMenu id="reservaBeanNome" value="#{reservaBean.example.quarto}" converter="#{quartoBean.converter}"  
+								 style="width:80%;height:30px;border-radius: 3px;">
+				 <f:selectItem/>
+				 <f:selectItems value="#{quartoBean.allAtivos}" var="_item" itemLabel="#{_item.nomeQuarto}" itemValue="#{_item}" />
+				 </p:selectOneMenu>
+				 <p:message for="reservaBeanNome" styleClass="error"/>
+				 </h:panelGroup>
+				 <h:outputText />  		
+				 
+				  <p:outputLabel for="reservaCheckin" value="Data de Check-in:" />
+                                 <h:panelGroup>
+                                 <p:calendar id="reservaCheckin" value="#{reservaBean.example.dataCheckin}" pattern="dd/MM/yyyy" 
+                                 mask ="true" 
+                                 style="width:100px;height:30px;border-radius: 3px;">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                     </p:calendar>
+                                 <p:message for="reservaCheckin" styleClass="error"/>
+                                 </h:panelGroup>
+                                 <h:outputText/> 
+                                
+                                 <p:outputLabel for="reservaCheckout" value="Data de Check-out:" />
+                                 <h:panelGroup>
+                                 <p:calendar id="reservaCheckout" value="#{reservaBean.example.dataCheckout}" pattern="dd/MM/yyyy" 
+                                 mask ="true" 
+                                 style="width:100px;height:30px;border-radius: 3px;">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                     </p:calendar>
+                                 <p:message for="reservaCheckout" styleClass="error"/>
+                                 </h:panelGroup>
+                                 <h:outputText  /> 
+                      
                   
                 <!--  -->
 							<h:outputText />
@@ -110,6 +141,36 @@
 					<h:outputText id="_itemValor" value="#{_item.quarto.valorDiaria}" />
 					</div>
 					</h:link>
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Data de Check-in " />
+						</f:facet>
+						<h:link outcome="/reserva/view">
+							<f:param name="id" value="#{_item.id}" />
+							  <div style="text-align: center;">
+							<h:outputText id="_itemDataCheckin"
+								value="#{_item.dataCheckin}">
+								<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+							</h:outputText>
+							</div>
+						</h:link>
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Data de Check-out " />
+						</f:facet>
+						<h:link outcome="/reserva/view">
+							<f:param name="id" value="#{_item.id}" />
+							  <div style="text-align: center;">
+							<h:outputText id="_itemDataCheckout"
+								value="#{_item.dataCheckout}">
+								<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+							</h:outputText>
+							</div>
+						</h:link>
 					</p:column>
 					
 				

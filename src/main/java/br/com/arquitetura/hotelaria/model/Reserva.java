@@ -23,6 +23,10 @@ public class Reserva implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_Quarto", nullable = true)
 	private Quarto quarto;
+			
+	@ManyToOne
+	@JoinColumn(name = "id_Cliente", nullable = true)
+	private Cliente cliente;
 
 	@ManyToOne
 	@JoinColumn(name = "id_Pagamento", nullable = true)
@@ -53,6 +57,12 @@ public class Reserva implements Serializable {
 	
 	@Column(name="Status_Pagamento")
 	private String statusPagamento;
+	
+	@Column(name="checkoutRealizado")
+	private boolean checkoutRealizado = false;
+	
+	
+	
 	
 	@Transient
 	private String codigo;
@@ -146,6 +156,22 @@ public class Reserva implements Serializable {
 		this.statusPagamento = statusPagamento;
 	}
 
+	public boolean isCheckoutRealizado() {
+		return checkoutRealizado;
+	}
+
+	public void setCheckoutRealizado(boolean checkoutRealizado) {
+		this.checkoutRealizado = checkoutRealizado;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -163,6 +189,20 @@ public class Reserva implements Serializable {
 		return true;
 	}
 	
+	public String getCheckoutSim()
+	{
+		if (this.checkoutRealizado== true)
+		{
+			return "Sim";
+		}
+		else
+		{
+			return "Não";
+		}
+		
+		
+	}
+	
 	public Boolean getReservaPaga() {
 		return reservaPaga;
 	}
@@ -171,6 +211,7 @@ public class Reserva implements Serializable {
 		this.reservaPaga = reservaPaga;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -106,7 +106,7 @@ private Long queryId;
 	@Inject
 	private Conversation conversation;
 
-	@PersistenceContext(unitName = "hotelaria-persistence-unit", type = PersistenceContextType.EXTENDED)
+	@PersistenceContext(unitName = "hotelaria-persistence-unit", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;
 
 	public String create() {
@@ -165,6 +165,22 @@ private Long queryId;
 		}
 	}
 
+	public String update(Quarto quarto) {
+
+		try {
+				this.entityManager.merge(quarto);
+				return "ok";
+			}
+		 
+		catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(e.getMessage()));
+			
+			System.out.println(e);
+			return null;
+		}
+	}
+	
 	public String delete() {
 		this.conversation.end();
 
@@ -392,7 +408,7 @@ private Long queryId;
 		 for (int i = 0; i < allQuartos.size(); i++) {
 			 Quarto quarto = allQuartos.get(i);
 	     	  
-	     	   if(quarto.isDisponivel() == true ){
+	     	   if(quarto.isDisponivel() == true && quarto.isQuartoLimpo() == true){
 	        	   allAtivos.add(quarto);
 	           }
 	          

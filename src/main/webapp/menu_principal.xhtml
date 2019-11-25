@@ -23,14 +23,7 @@
 			</span>
 		</a>
 
-			<ul class="treeview-menu">
-
-				<li class="treeview"><a href="#"> <i class="fa fa-circle-o"></i>
-						<span>Cadastros Auxiliares</span> <span
-						class="pull-right-container"> <i
-							class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
+			
 					<ul class="treeview-menu">
 						<!-- começo submenu cad auxiliares -->
 						<li class="treeview"><a href="#"> <i class="fa fa-tags"></i>
@@ -41,14 +34,14 @@
 							<ul class="treeview-menu">
 								<li><p:link
 										href="/quarto/create.xhtml"
-										title="Adiciona Tipo Equipamento"
+										title="Adiciona Quarto"
 										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
 										<i class="fa fa-plus"></i>
 										<span>Adicionar</span>
 									</p:link></li>
 								<li><p:link
 										href="/quarto/search.xhtml"
-										title="Consulta Tipo Equipamento"
+										title="Consulta Quartos"
 										rendered="#{keycloakBean.role != 'semRole'}">
 										<i class="fa fa-search"></i>
 										<span>Consultar</span>
@@ -63,32 +56,43 @@
 							<ul class="treeview-menu">
 								<li><p:link
 										href="/reserva/create.xhtml"
-										title="Adiciona Tipo Equipamento"
+										title="Adiciona Reserva"
 										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
 										<i class="fa fa-plus"></i>
 										<span>Adicionar</span>
 									</p:link></li>
 								<li><p:link
 										href="/reserva/search.xhtml"
-										title="Consulta Tipo Equipamento"
+										title="Consulta Reservas"
 										rendered="#{keycloakBean.role != 'semRole'}">
 										<i class="fa fa-search"></i>
 										<span>Consultar</span>
 									</p:link></li>
 							</ul></li>
-						
-						
-
-						
-
-						
-
-						
-					</ul> <!-- termino do submenu cadastro equipamentos --></li>
-
-				
-				
-			</ul></li>
+							
+							<li class="treeview"><a href="#"> <i class="fa fa-tags"></i>
+								<span> Clientes</span> <span
+								class="pull-right-container"><i
+									class="fa fa-angle-left pull-right"></i> </span>
+						</a>
+							<ul class="treeview-menu">
+								<li><p:link
+										href="/cliente/create.xhtml"
+										title="Adiciona Clientes"
+										rendered="#{keycloakBean.role == 'cadastro' or keycloakBean.role == 'admin'}">
+										<i class="fa fa-plus"></i>
+										<span>Adicionar</span>
+									</p:link></li>
+								<li><p:link
+										href="/cliente/search.xhtml"
+										title="Consulta Clientes"
+										rendered="#{keycloakBean.role != 'semRole'}">
+										<i class="fa fa-search"></i>
+										<span>Consultar</span>
+									</p:link></li>
+							</ul></li>
+							</ul>
+				</li>
 	</ul>
 
 

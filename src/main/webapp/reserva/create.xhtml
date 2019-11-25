@@ -59,7 +59,30 @@
 				 </h:panelGroup>
 				 <h:outputText value="*" styleClass="required" />  		
 				 
-				  <p:outputLabel for="reservaCheckin" value="Data de Checkin:" />
+				     <p:outputLabel for="reservaBeanCliente" value="Cliente: "/>
+				 <h:panelGroup>
+				 <p:selectOneMenu id="reservaBeanCliente" value="#{reservaBean.reserva.cliente}" converter="#{clienteBean.converter}" 
+				 filter="true" filterMatchMode="startsWith" 
+								  requiredMessage="Campo Obrigatório" required = "true" style="width:80%;height:30px;border-radius: 3px;">
+				 <f:selectItem/>
+				 <f:selectItems value="#{clienteBean.allAtivos}" var="_item" itemLabel="#{_item.nomeCompleto}" itemValue="#{_item}" />
+
+            <p:column>
+               <f:facet name="header">
+                   <h:outputText value="Nome"/>
+                </f:facet>
+                <h:outputText value="#{reservaBean.reserva.cliente.nomeCompleto}" />
+            </p:column>
+				 </p:selectOneMenu>
+				 
+				 
+				 
+				 
+				 <p:message for="reservaBeanCliente" styleClass="error"/>
+				 </h:panelGroup>
+				 <h:outputText value="*" styleClass="required" />  		
+				 
+				  <p:outputLabel for="reservaCheckin" value="Data de Check-in:" />
                                  <h:panelGroup>
                                  <p:calendar id="reservaCheckin" value="#{reservaBean.reserva.dataCheckin}" pattern="dd/MM/yyyy" 
                                  mask ="true"  required ="true"   requiredMessage="Campo Obrigatório"
@@ -70,7 +93,7 @@
                                  </h:panelGroup>
                                  <h:outputText value="*" styleClass="required" /> 
                                 
-                                 <p:outputLabel for="reservaCheckout" value="Data de Checkout:" />
+                                 <p:outputLabel for="reservaCheckout" value="Data de Check-out:" />
                                  <h:panelGroup>
                                  <p:calendar id="reservaCheckout" value="#{reservaBean.reserva.dataCheckout}" pattern="dd/MM/yyyy" 
                                  mask ="true"  required ="true"   requiredMessage="Campo Obrigatório"

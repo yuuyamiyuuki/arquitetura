@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"
+	template="/admin.xhtml">
+
+	<f:metadata>
+	<f:viewParam name="id" value='#{clienteBean.id}'/>
+	<f:event type="preRenderView" listener='#{clienteBean.retrieve}'/>
+	<f:event type="preRenderView" listener="#{keycloakBean.buscaUser}"/>
+	</f:metadata>
+<script type="text/javascript" src="resources/js/DesabVoltarNav.js"></script>
+	 <div id="msgAviso" style="display:none;">
+    <span>Não é permitido voltar pelo botão do browser.</span>
+</div>
+
+	<ui:define name="title">
+	<h1 style="font-size:24px; color: #444"><b>Dados do Cliente</b></h1>
+	</ui:define>
+
+	<ui:define name="footer"/>
+	
+	<ui:define name="body">
+	<h:form rendered="#{keycloakBean.role != 'semRole'}">
+	 
+	<p:panel header="Informações" styleClass="box-primary">	 
+	<p:panelGrid columns="2" columnClasses="botaoGrid ui-grid-col-12,botaoGrid ui-grid-col-11" layout="grid">
+	<p:panel styleClass="botaoGrid ui-grid-col-6">
+
+	<p:outputLabel for="clienteBeanNome" value="Nome: &nbsp;"/>
+	<h:outputText id="clienteBeanNome" value="#{clienteBean.cliente.nomeCompleto}"/>
+	<br></br>	
+	
+	<p:outputLabel for="clienteBeanCpf" value="Cpf: &nbsp;"/>
+	<h:outputText id="clienteBeanCpf" value="#{clienteBean.cliente.cpf}"/>
+	<br></br>	
+	
+	<p:outputLabel for="clienteBeanTelefone" value="Telefone: &nbsp;"/>
+	<h:outputText id="clienteBeanTelefone" value="#{clienteBean.cliente.telefone}"/>
+	<br></br>	
+	
+	<p:outputLabel for="clienteBeanEmail" value="Email: &nbsp;"/>
+	<h:outputText id="clienteBeanEmail" value="#{clienteBean.cliente.email}"/>
+	<br></br>
+	
+		<p:outputLabel for="Endereco" value="Endereco: &nbsp;"/>
+	<h:outputText id="Endereco" value="#{clienteBean.cliente.endereco} - #{clienteBean.cliente.numero}"/>
+	<br></br>
+	
+	<p:outputLabel for="clienteBeanStatus" value="Status: &nbsp;"/>
+	<h:outputText id="clienteBeanStatus" value="#{clienteBean.cliente.status}"/>
+	<br></br>
+	
+
+	<br></br>
+				
+      </p:panel>
+			</p:panelGrid>
+		
+			
+		<br></br>
+		<p:panelGrid columns="3" styleClass="botaoGrid"  rendered="#{keycloakBean.role == 'funcionario' or keycloakBean.role == 'admin'}">
+		<h:panelGroup>
+		<b:button value="Voltar"  outcome="search" styleClass="btn btn-primary" style="font-size:13px;" iconAwesome="fa-undo"/>
+		   <b:commandButton value="Inativar Cliente" action="#{clienteBean.ativaInativa}" rendered="#{clienteBean.ativaStatus}" styleClass="btn btn-default btn btn-warning" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-file-o"/>
+					<b:commandButton value="Ativar Cliente" action="#{clienteBean.ativaInativa}" rendered="#{!clienteBean.ativaStatus}" styleClass="btn btn-success" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-file-o"/>        	           
+		      
+		        
+		           
+		</h:panelGroup>
+		</p:panelGrid>
+		</p:panel>
+		
+		</h:form>
+	</ui:define>
+</ui:composition>

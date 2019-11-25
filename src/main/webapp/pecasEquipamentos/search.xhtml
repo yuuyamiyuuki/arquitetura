@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	xmlns:b="http://bootsfaces.net/ui"
+    xmlns:p="http://primefaces.org/ui"
+	template="/admin.xhtml">
+	<f:metadata>
+	<f:viewParam name="page" value='#{pecasEquipamentoBean.page}' />
+<!-- 	<f:event type="preRenderView"
+			 listener='#{pecasEquipamentoBean.paginate}' /> -->
+	<f:event type="preRenderView" listener="#{keycloakBean.buscaUser}" />
+	</f:metadata>
+<script type="text/javascript" src="resources/js/DesabVoltarNav.js"></script>
+	 <div id="msgAviso" style="display:none;">
+    <span>Não é permitido voltar pelo botão do browser.</span>
+</div>
+
+	<ui:define name="title">
+	<h1 style="font-size: 20px; color: #444"> Consulta Quartos </h1>
+	</ui:define>
+
+
+	<ui:define name="body">
+	<h:form id="search"
+			rendered="#{keycloakBean.role != 'semRole'}">
+
+	<p:panel header="Filtro de Pesquisa" styleClass="box-primary">
+	<f:validateBean disabled="true">
+	<h:panelGroup styleClass="search">
+
+	<p:panelGrid columns="6" columnClasses="botaoGrid ui-grid-col-2,botaoGrid ui-grid-col-4,botaoGrid ui-grid-col-2,botaoGrid ui-grid-col-2, botaoGrid ui-grid-col-4,botaoGrid ui-grid-col-2, botaoGrid " layout="grid">
+							
+					      <p:outputLabel for="pecasEquipamentoBeanExampleNome"
+                                         value="Nome:" />
+                          <h:panelGroup>
+                          <p:inputText id="pecasEquipamentoBeanExampleNome"
+                                       value="#{pecasEquipamentoBean.example.nomeQuarto}"
+                                       styleClass="inputBig" />
+                          <h:message for="pecasEquipamentoBeanExampleNome"
+                                     styleClass="error" />
+                          </h:panelGroup>
+                          <h:outputText/>
+				
+				<!--  -->
+				   
+                         	<p:outputLabel for="pecasEquipamentoBeanValor" value="Valor da Diaria" />
+					<h:panelGroup>
+					<p:inputNumber id="pecasEquipamentoBeanValor"
+							     value="#{pecasEquipamentoBean.example.valorDiaria}" symbol=" R$" symbolPosition="s" 
+                               decimalSeparator="," thousandSeparator="."
+							     styleClass="inputBig"/>
+					<p:message for="pecasEquipamentoBeanValor"
+							styleClass="error" />
+					</h:panelGroup>
+					<h:outputText />
+		
+                <!--  -->
+
+                          <p:outputLabel for="pecasEquipamentoBeanDisponivel" value="Disponivel" />			  
+                          <h:panelGroup>
+                          <p:selectOneRadio id="pecasEquipamentoBeanDisponivel" value="#{pecasEquipamentoBean.example.disponivelPesquisa}" checked = "false">
+                          <f:selectItem itemLabel = "Todos" itemValue = "Todos" />
+                          <f:selectItem itemLabel = "Sim" itemValue = "Sim"  />
+                          <f:selectItem itemLabel = "Não" itemValue = "Nao" />  
+                          </p:selectOneRadio>
+                          <h:message for="pecasEquipamentoBeanDisponivel" styleClass="error"/> 
+                                 </h:panelGroup>
+                                 <h:outputText />
+		
+                          
+                          
+                          <p:outputLabel for="pecasEquipamentoBeanLimpo" value="Limpo" />			  
+                          <h:panelGroup>
+                          <p:selectOneRadio id="pecasEquipamentoBeanLimpo" value="#{pecasEquipamentoBean.example.pecasEquipamentoPesquisa}" checked = "false">
+                          <f:selectItem itemLabel = "Todos" itemValue = "Todos" />
+                          <f:selectItem itemLabel = "Sim" itemValue = "Sim"  />
+                          <f:selectItem itemLabel = "Não" itemValue = "Nao" />  
+                          </p:selectOneRadio>
+                          <h:message for="pecasEquipamentoBeanLimpo" styleClass="error"/> 
+                         </h:panelGroup>
+
+                  
+                <!--  -->
+							<h:outputText />
+							<h:outputText />
+							<h:outputText />
+							<br></br>
+							
+						 
+						  </p:panelGrid>
+						  
+						  <br></br>
+						  <p:panelGrid columns="1" styleClass="botaoGrid">
+						  <h:panelGroup>
+						<b:commandButton id="pesquisa" value="Pesquisar" action='#{pecasEquipamentoBean.search}' styleClass="btn btn-primary" style="font-size:13px;" iconAwesome="fa-search"
+						actionListener='#{pecasEquipamentoBean.paginate}' />
+						  <b:commandButton value="Limpar" styleClass="btn btn-primary" 	
+						                   style=" margin: 0px 0px 0px 10px; 
+							               font-size:13px;" iconAwesome="fa-search-minus">
+                          <p:ajax update="@form" resetValues="true" />
+                          </b:commandButton> 
+
+<!-- 								<b:commandButton id="btn_deletar_1" value="Deletar" -->
+<!-- 									icon="fa fa-trash" styleClass="btn-danger" update="sistemaOperacionalBeanPageItems" -->
+<!-- 									actionListener="#{sistemaOperacionalBean.delete}" -->
+<!-- 									disabled="#{sistemaOperacionalBean.nadaSelecionado}"> -->
+<!-- 									<p:confirm header="Deletar Registro" -->
+<!-- 										message="#{msgPadrao.confirmaDeletar}" icon="ui-icon-danger" /> -->
+<!-- 								</b:commandButton> -->
+								
+								
+								<!-- 								<b:commandButton  value="Novo Tipo de Equipamento" action='#{sistemaOperacionalBean.create}' styleClass="btn btn-primary" style=" margin: 0px 0px 0px 10px; font-size:13px;" iconAwesome="fa-file-o"/> -->
+						</h:panelGroup>
+						</p:panelGrid>
+					    </h:panelGroup>
+				        </f:validateBean>
+			            </p:panel>
+
+<br></br>
+<p:panel styleClass="box-primary">
+<p:dataTable id="pecasEquipamentoBeanPageItems"
+			 value="#{pecasEquipamentoBean.pageItems}" var="_item"
+			 paginatorPosition="bottom"		
+			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+			 paginator="true" rows="10" style="margin: 10px 0px 140px 0px;"
+			 emptyMessage="Registro não encontrado.">
+<p:ajax event="page" update=":search:pesquisa" process="@form" />
+
+<!-- 		selection="#{sistemaOperacionalBean.sistemaSelecionado}" -->
+<!-- 					<p:column selectionMode="single" styleClass="align-center" /> -->
+
+					<p:column>
+					<f:facet name="header">
+					<h:outputText value="Nome " />
+					</f:facet>
+					<h:link outcome="/pecasEquipamento/view">
+					<f:param name="id" value="#{_item.id}" />
+					<div style="text-align: center;">
+					<h:outputText id="_itemNome" value="#{_item.nomeQuarto}" />
+					</div>
+					</h:link>
+					</p:column>
+
+				
+			</p:dataTable>
+			</p:panel>
+
+</h:form>
+</ui:define>
+</ui:composition>
